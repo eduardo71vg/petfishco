@@ -1,0 +1,26 @@
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PetFishCo <?php isset($shop) ? ' - ' . $shop->getName() : ''; ?></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo $this->url->get('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+	  <link href="<?php echo $this->url->get('css/scrolling-nav.css'); ?>" rel="stylesheet">
+	  <link rel="stylesheet" href="<?php echo $this->url->get('vendor/fontawesome/css/solid.css'); ?>" integrity="sha384-avJt9MoJH2rB4PKRsJRHZv7yiFZn8LrnXuzvmZoD3fh1aL6aM6s0BBcnCvBe6XSD" crossorigin="anonymous">
+	  <link rel="stylesheet" href="<?php echo $this->url->get('vendor/fontawesome/css/fontawesome.css'); ?>" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">
+  </head>
+
+  <body id="page-top">
+
+    <?php $this->partial("navigation"); ?>
+
+	  <p><?php $this->flashSession->output(); ?></p>
+
+
+

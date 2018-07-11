@@ -1,0 +1,32 @@
+<?php $this->partial("header"); ?>
+
+	<header class="bg-primary text-white">
+		<div class="container text-center">
+			<h1>Welcome to PetFishCo</h1>
+			<p class="lead">Please Choose Your Branch Bellow</p>
+		</div>
+	</header>
+
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-center">PetFishCo Branches</h2>
+            <p class="lead text-center">Show Aquariums and Fishes available in each branch.  </p>
+	          <p class="text-center">(Species, Aquarium Materials and Aquarium Shapes Catalog are shared)</p>
+			<div class="home-flag-container">
+				<?php
+				foreach ($shops as $shop){ ?>
+					<div class="home-flag">
+						<a href="<?php echo $this->url->get("shop/".$shop->getId()); ?>">
+							<?php echo Phalcon\Tag::imageInput(["src" => "/img/".$shop->getId().".png"]); ?>
+						</a>
+					</div>
+				<?php } ?>
+			</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<?php $this->partial("footer"); ?>

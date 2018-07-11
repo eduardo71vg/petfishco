@@ -1,0 +1,13 @@
+{
+    "name": "petfishco/application",
+    "require": {
+        "phalcon/devtools": "^2.0",
+        "vlucas/phpdotenv": "^2.5"
+    },
+    "authors": [
+        {
+            "name": "Eduardo Hernandez",
+            "email": "ppjehg@gmail.com"
+        }
+    ]
+}

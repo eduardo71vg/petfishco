@@ -1,0 +1,59 @@
+<?php /**@var $aquarium \PetFishCo\Frontend\Models\DTO\Aquarium*/ ?>
+
+<header class="bg-primary text-white not-main">
+	<div class="container text-center">
+		<h1>Aquarium <?php echo $aquarium->getId()?></h1>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Capacity</th>
+						<th scope="col">Shape</th>
+						<th scope="col">Material</th>
+						<th scope="col">Created</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?php echo $aquarium->getCapacity(); ?></th>
+						<td><?php echo $aquarium->getAquariumShape(); ?></td>
+						<td><?php echo $aquarium->getAquariumMaterial(); ?></td>
+						<td><?php echo $aquarium->getCreatedAt(); ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<p class="lead text-center"><a class="btn btn-success" href="<?php echo $this->url->get('/aquarium/'.$aquarium->getId().'/fish/add'); ?>" role="button">Add Fishes</a></p>
+</header>
+
+<section id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto ">
+				<h2 class="text-center">Fishes</h2>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Capacity</th>
+								<th scope="col">Shape</th>
+								<th scope="col">Material</th>
+								<th scope="col">Created</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><?php echo $aquarium->getCapacity(); ?></th>
+								<td><?php echo $aquarium->getAquariumShape(); ?></td>
+								<td><?php echo $aquarium->getAquariumMaterial(); ?></td>
+								<td><?php echo $aquarium->getCreatedAt(); ?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
