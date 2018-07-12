@@ -27,15 +27,15 @@ try {
 	$config['environment'] = getenv('APP_ENV');
 
 
+	/**
+	 * Include Autoloader
+	 */
+	include APP_PATH . '/config/loader.php';
+
     /**
      * Include Services
      */
     include APP_PATH . '/config/services.php';
-
-    /**
-     * Include Autoloader
-     */
-    include APP_PATH . '/config/loader.php';
 
     /**
      * Starting the application

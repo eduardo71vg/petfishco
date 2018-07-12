@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PetFishCo <?php isset($shop) ? ' - ' . $shop->getName() : ''; ?></title>
+    <title>PetFishCo <?php echo isset($shop) ? ' - ' . $shop->getName() : ''; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $this->url->get('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
@@ -19,8 +19,6 @@
   <body id="page-top">
 
     <?php $this->partial("navigation"); ?>
-
-	  <p><?php $this->flashSession->output(); ?></p>
 
 
 

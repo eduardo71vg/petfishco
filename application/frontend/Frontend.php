@@ -32,6 +32,7 @@ class Frontend implements ModuleDefinitionInterface {
 				'PetFishCo\Frontend\Models\Services' => APP_PATH . '/frontend/models/services/',
 				'PetFishCo\Frontend\Components' => APP_PATH . '/frontend/components/',
 				'PetFishCo\Frontend\Helpers' => APP_PATH . '/frontend/helpers/',
+				'PetFishCo\Frontend\Forms' => APP_PATH . '/frontend/forms/',
 			]
 		);
 		$loader->registerClasses([
@@ -101,12 +102,12 @@ class Frontend implements ModuleDefinitionInterface {
 			"flash",
 			function () {
 				return new FlashDirect(
-//					[
-//						"error"   => "alert alert-danger",
-//						"success" => "alert alert-success",
-//						"notice"  => "alert alert-info",
-//						"warning" => "alert alert-warning",
-//					]
+					[
+						"error"   => "alert alert-danger",
+						"success" => "alert alert-success",
+						"notice"  => "alert alert-info",
+						"warning" => "alert alert-warning",
+					]
 				);
 			}
 		);
@@ -115,7 +116,14 @@ class Frontend implements ModuleDefinitionInterface {
 		$di->set(
 			"flashSession",
 			function () {
-				return new FlashSession();
+				return new FlashSession(
+					[
+						"error"   => "alert alert-danger",
+						"success" => "alert alert-success",
+						"notice"  => "alert alert-info",
+						"warning" => "alert alert-warning",
+					]
+				);
 			}
 		);
 //

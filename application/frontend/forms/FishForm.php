@@ -4,6 +4,12 @@ namespace PetFishCo\Frontend\Forms;
 
 use PetFishCo\Frontend\Models\Services\Shop;
 use Phalcon\Forms\Form;
+use Phalcon\Forms\Element\Hidden;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Select;
+use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Validation\Validator\Numericality;
+use Phalcon\Validation\Validator\PresenceOf;
 
 class FishForm extends Form {
 
@@ -67,12 +73,17 @@ class FishForm extends Form {
 		$shopService = new Shop();
 		$species = $shopService->getSpecies();
 
-		$type = new Select('fish_specie_id',$species, [
-			'using' => ['id', 'name'],
+		$type = new Select('fish_specie_id', null, [
+			//'using' => [ $species['id'] => $species['name']],
 			'useEmpty' => true,
 			'emptyText' => '...',
 			'emptyValue' => ''
 		]);
+
+		/**@var $specie \PetFishCo\Frontend\Models\DTO\FishSpecie*/
+		foreach ($species as $index => $specie) {
+			$type->addOption([$specie->getId() => $specie->getName()]);
+		}
 		$type->setLabel('Specie');
 		$this->add($type);
 
@@ -89,5 +100,7 @@ class FishForm extends Form {
 			])
 		]);
 		$this->add($stock);
+
+		$entity = null;
 	}
 }

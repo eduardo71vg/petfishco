@@ -14,28 +14,40 @@ use PetFishCo\Frontend\Models\Services\Shop as ShopService;
  * @package PetFishCo\Frontend\Controllers
  *
  * @property Phalcon\Http\Client\Provider\Curl $httpClient
- * @property Config $config
- * @property Transformer $transformer
- * @property Flash\Direct $flash
- * @property Flash\Session $flashSession
+ * @property Config                            $config
+ * @property Transformer                       $transformer
+ * @property Flash\Direct                      $flash
+ * @property Flash\Session                     $flashSession
  */
-class BaseController extends Controller{
+class BaseController extends Controller {
 
 	/**
 	 * @var ResponseValidator
 	 */
 	protected $responseValidator;
 
-	public function initialize(){
+
+	protected $service;
+
+	public function initialize() {
+
 		$this->responseValidator = new ResponseValidator();
 
-
-		//TODO check if session has catalogs
-		//load options material, shapes , species
 		$shopService = new ShopService();
-		$shopService->retrieveCatalogs();
 
-		//store in sessions to avoid retrieve them every single time
-		//$shopService->storeInSession();
+		//check if session has catalogs
+		if (!$shopService->sessionHasCatalogs()) {
+			//load options material, shapes , species
+			$shopService->retrieveCatalogs();
+			//store in sessions to avoid retrieve them every single time
+			$shopService->storeInSession();
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	protected function getShop() {
+		return $this->session->get('shop');
 	}
 }

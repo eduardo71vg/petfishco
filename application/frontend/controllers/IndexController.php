@@ -16,11 +16,23 @@ class IndexController extends BaseController {
 		if($this->responseValidator->isSuccessfulResponse($response)){
 			$shops = $this->transformer->jsonToObject($response->body, new Shop());
 		}else{
-			$this->flash->error("Error fetching shops data");
+			$this->flashSession->error("Error fetching shops data");
 			$shops = [];
 		}
 
 		$this->view->setVar('shops', $shops);
+	}
+
+	public function notfoundAction(){
+
+		$uri = $this->request->getURI();
+		if(strpos($uri, 'api')){
+			$this->response->setStatusCode('404');
+			$this->response->setContent('Not Found');
+			$this->response->send();
+		}
+
+		$this->view->pick('index/404');
 	}
 
 }

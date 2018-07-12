@@ -1,4 +1,6 @@
 <?php /**@var $form \Phalcon\Forms\Form*/ ?>
+<?php /**@var $tag \Phalcon\Tag */ ?>
+<?php $tag = $this->tag; ?>
 <header class="bg-primary text-white not-main">
 	<div class="container text-center">
 		<h1>Add Aquarium Shop <?php echo (!empty($shop)) ? $shop->getId() : '';?></h1>
@@ -12,32 +14,24 @@
 				<h2 class="text-center">Add Aquarium</h2>
 				<?php $this->getContent(); ?>
 
-				<?php $this->tag->form("products/create"); ?>
+				<?php $this->partial("flash_messages"); ?>
 
-				<ul class="pager">
-<!--					<li class="previous pull-left">-->
-<!--						--><?php //link_to("products", "&larr; Go Back") ?>
-<!--					</li>-->
-					<li class="pull-right">
-						<?php $this->tag->submitButton("Save", ["class" => "btn btn-success"]); ?>
-					</li>
-				</ul>
-
+				<?php echo $tag->form("fish/create"); ?>
 				<fieldset>
 
 					<?php foreach ($form->getElements() as $index => $element) : ?>
-					<?php if(is_a($element, 'Phalcon\Forms\Element\Hidden')): ?>
-					<?php $element ?>
-					<?php else: ?>
-					<div class="form-group">
-						<?php $element->getLabel() ?>
-						<?php $element->render(['class'=> 'form-control']) ?>
-					</div>
-					<?php endif; ?>
+						<?php if(is_a($element, 'Phalcon\Forms\Element\Hidden')): ?>
+							<?php echo $element->render(); ?>
+						<?php else: ?>
+							<div class="form-group">
+								<?php echo $element->getLabel() ?>
+								<?php echo $element->render(['class'=> 'form-control']) ?>
+							</div>
+						<?php endif; ?>
 					<?php endforeach; ?>
 
 				</fieldset>
-
+				<?php echo $tag->submitButton(["Save", "class" => "btn btn-success"]); ?>
 				</form>
 
 			</div>

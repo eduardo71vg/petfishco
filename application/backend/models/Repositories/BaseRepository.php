@@ -1,7 +1,8 @@
 <?php
 
-namespace PetFishCo\Core\Mvc;
+namespace PetFishCo\Backend\Models\Repositories;
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\ModelInterface;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 
@@ -12,6 +13,10 @@ use Phalcon\Paginator\Adapter\QueryBuilder;
  */
 class BaseRepository implements RestRepositoryInterface {
 
+	/**
+	 * @var array
+	 */
+	protected $validationErrors;
 
 	/**
 	 * @var array
@@ -67,6 +72,15 @@ class BaseRepository implements RestRepositoryInterface {
 	public function findOneBy(array $criteria) {
 		return ($this->model)::findFirst($criteria);
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getValidationErrors() {
+		return $this->validationErrors;
+	}
+
+
 
 	/**
 	 * @inheritdoc
@@ -156,10 +170,13 @@ class BaseRepository implements RestRepositoryInterface {
 	 * @inheritdoc
 	 */
 	public function save(array $data) {
-		// generate uid
-		$data['uid'] = Uuid::uuid4();
 
-		return $this->model->create($data);
+		$class_name = get_class($this->model);
+		/**@var $model ModelInterface*/
+		$model = new $class_name;
+		$result = $model->create($data);
+
+		return ($result) ? $model : $result;
 	}
 
 	/**
@@ -208,4 +225,14 @@ class BaseRepository implements RestRepositoryInterface {
 			return new User();
 		}
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function isValid(array $data) {
+
+		return true;
+	}
+
+
 }

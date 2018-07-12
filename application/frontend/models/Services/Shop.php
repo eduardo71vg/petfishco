@@ -33,6 +33,12 @@ class Shop extends BaseComponent {
 	 * @return AquariumShape[]
 	 */
 	public function getShapes() {
+		if(empty($this->shapes)){
+			if(!$this->retrieveCatalogsFromSession()){
+				$this->retrieveCatalogs();
+				$this->storeInSession();
+			}
+		}
 		return $this->shapes;
 	}
 
@@ -40,6 +46,12 @@ class Shop extends BaseComponent {
 	 * @return AquariumMaterial[]
 	 */
 	public function getMaterials() {
+		if(empty($this->materials)){
+			if(!$this->retrieveCatalogsFromSession()){
+				$this->retrieveCatalogs();
+				$this->storeInSession();
+			}
+		}
 		return $this->materials;
 	}
 
@@ -47,6 +59,14 @@ class Shop extends BaseComponent {
 	 * @return FishSpecie[]
 	 */
 	public function getSpecies() {
+
+		if(empty($this->species)){
+			if(!$this->retrieveCatalogsFromSession()){
+				$this->retrieveCatalogs();
+				$this->storeInSession();
+			}
+		}
+
 		return $this->species;
 	}
 
@@ -80,6 +100,22 @@ class Shop extends BaseComponent {
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function retrieveCatalogsFromSession(){
+
+		if($this->sessionHasCatalogs()){
+
+			$catalogs = $this->session->get('catalogs');
+			$this->species = $catalogs['species'];
+			$this->shapes = $catalogs['shapes'];
+			$this->materials = $catalogs['materials'];
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Stores Catalogs data in session
 	 */
 	public function storeInSession(){
@@ -89,5 +125,12 @@ class Shop extends BaseComponent {
 			'species' => $this->species,
 		];
 		$this->session->set('catalogs', $value);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function sessionHasCatalogs(){
+		return $this->session->has('catalogs');
 	}
 }

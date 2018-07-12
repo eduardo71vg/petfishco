@@ -16,13 +16,15 @@
 	          <p class="text-center">(Species, Aquarium Materials and Aquarium Shapes Catalog are shared)</p>
 			<div class="home-flag-container">
 				<?php
-				foreach ($shops as $shop){ ?>
-					<div class="home-flag">
-						<a href="<?php echo $this->url->get("shop/".$shop->getId()); ?>">
-							<?php echo Phalcon\Tag::imageInput(["src" => "/img/".$shop->getId().".png"]); ?>
-						</a>
-					</div>
-				<?php } ?>
+				if(!empty($shops)):
+					foreach ($shops as $shop): ?>
+						<div class="home-flag">
+							<a href="<?php echo $this->url->get("shop/".$shop->getId()); ?>">
+								<?php echo Phalcon\Tag::imageInput(["src" => "/img/".$shop->getId().".png"]); ?>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
           </div>
         </div>

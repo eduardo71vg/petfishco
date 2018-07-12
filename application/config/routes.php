@@ -9,12 +9,14 @@ $router = $di->get('router');
 //$router->setDefaultAction('index');
 //$router->removeExtraSlashes(true);
 
-//$router->notFound(
-//	[
-//		'controller' => 'index',
-//		'action'     => 'notFoundAction',
-//	]
-//);
+$router->notFound(
+	[
+		"module"     => "frontend",
+		'controller' => 'index',
+		'action'     => 'notfound',
+		"namespace"  => "PetFishCo\Frontend\Controllers"
+	]
+);
 
 /**
  * Front end
@@ -44,30 +46,60 @@ $frontend_group->add(
 /**
  * Aquarium
  */
-$frontend_group->add(
-	"/aquarium/{id:([0-9]+)}/edit",
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{id:([0-9]+)}/edit",
 	[
 		"action" => "edit",
 		"controller" => "Aquarium",
-		"id" => 1
 	]
-);
-$frontend_group->add(
-	"/aquarium/{id:([0-9]+)}",
+))->setName('aquarium-edit');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{id:([0-9]+)}",
 	[
 		"action" => "index",
 		"controller" => "Aquarium",
-		"id" => 1
 	]
-);
-$frontend_group->add(
-	"/aquarium/add",
+))->setName('aquarium-index');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/add",
 	[
 		"action" => "add",
 		"controller" => "Aquarium",
 		"id" => 1
 	]
-);
+))->setName('aquarium-add');
+/**
+ * Fish
+ */
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/fish/add",
+	[
+		"action" => "add",
+		"controller" => "Fish",
+	]
+))->setName('fish-add');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/fish/{fish_id:([0-9]+)}/update",
+	[
+		"action" => "update",
+		"controller" => "Fish",
+	]
+))->setName('fish-update');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/fish/{fish_id:([0-9]+)}/edit",
+	[
+		"action" => "edit",
+		"controller" => "Fish",
+	]
+))->setName('fish-edit');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/fish/create",
+	[
+		"action" => "create",
+		"controller" => "Fish",
+	]
+))->setName('fish-create');
+
 $router->mount($frontend_group);
 
 
@@ -97,27 +129,27 @@ $api_group->addGet(
 );
 // GET aquarium single
 $api_group->addGet(
-	"/aquarium/{id:([0-9]+)}",
+	"/aquarium_instance/{id:([0-9]+)}",
 	[
 		"action" => "get",
-		"controller" => "aquarium",
+		"controller" => "aquariuminstance",
 	]
 );
 // PUT aquarium update
 $api_group->addPut(
-	"/aquarium/{id:([0-9]+)}",
+	"/aquarium_instance/{id:([0-9]+)}",
 	[
 		"action" => "put",
-		"controller" => "aquarium",
+		"controller" => "aquariuminstance",
 
 	]
 );
 //POST aquarium add
 $api_group->addPost(
-	"/aquarium",
+	"/aquarium_instance",
 	[
 		"action" => "put",
-		"controller" => "aquarium",
+		"controller" => "aquariuminstance",
 
 	]
 );
@@ -138,10 +170,10 @@ $api_group->addGet(
 	]
 );
 $api_group->addGet(
-	"/aquarium/{aquarium_id:([0-9]+)}/fishes",
+	"/aquarium_instance/{aquarium_instance_id:([0-9]+)}/fishes",
 	[
 		"action" => "fishes",
-		"controller" => "aquarium",
+		"controller" => "aquariuminstance",
 
 	]
 );
@@ -165,6 +197,20 @@ $api_group->addGet(
 		"controller" => "fish",
 	]
 );
+$api_group->addPost(
+	"/fish",
+	[
+		"action" => "add",
+		"controller" => "fish",
+	]
+);
+$api_group->addPut(
+	"/fish/{id:([0-9]+)}",
+	[
+		"action" => "put",
+		"controller" => "fish",
+	]
+);
 /**
  * SHOP
  */
@@ -183,7 +229,7 @@ $api_group->addGet(
 	]
 );
 $api_group->addGet(
-	"/shop/{shop_id:([0-9]+)}/aquariums",
+	"/shop/{shop_id:([0-9]+)}/aquarium_instances",
 	[
 		"action" => "aquariums",
 		"controller" => "shop",

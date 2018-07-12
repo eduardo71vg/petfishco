@@ -1,8 +1,6 @@
 <?php
 namespace PetFishCo\Backend\Models\Repositories;
 
-use PetFishCo\Core\Mvc\BaseRepository;
-use PetFishCo\Core\Mvc\RestRepositoryInterface;
 use Phalcon\Mvc\Model\Query\Builder;
 use PetFishCo\Backend\Models\Entities\AquariumMaterial;
 use PetFishCo\Backend\Models\Entities\AquariumShape;
@@ -28,7 +26,7 @@ class Aquarium extends BaseRepository implements RestRepositoryInterface {
 				'aquarium_material' => 'am.name',
 				'a.created_at'
 			]);
-
-
 	}
+
+
 }

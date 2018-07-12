@@ -18,6 +18,10 @@ $di['url'] = function () use ($config) {
     return $url;
 };
 
+$di['dbProfiler'] = function(){
+	return new \Phalcon\Db\Profiler();
+};
+
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
@@ -25,18 +29,21 @@ $di['db'] = function () use ($config) {
 
 	$eventsManager = new EventsManager();
 
-	$logger = new FileLogger(APP_PATH.'/logs/sql.log');
+//	$logger = new FileLogger(APP_PATH.'/logs/sql.log');
+//
+//	// Listen all the database events
+//	$eventsManager->attach(
+//		'db:beforeQuery',
+//		function ($event, $connection) use ($logger) {
+//			$logger->log(
+//				$connection->getSQLStatement(),
+//				\Phalcon\Logger::INFO
+//			);
+//		}
+//	);
 
-	// Listen all the database events
-	$eventsManager->attach(
-		'db:beforeQuery',
-		function ($event, $connection) use ($logger) {
-			$logger->log(
-				$connection->getSQLStatement(),
-				\Phalcon\Logger::INFO
-			);
-		}
-	);
+
+	$eventsManager->attach('db', new \PetFishCo\Middlewares\DbQuery());
 
 	$connection = new DbAdapter($config->database->toArray());
 
@@ -49,6 +56,7 @@ $di['db'] = function () use ($config) {
 $di['router'] = function () {
 	return new Phalcon\Mvc\Router(false);
 };
+
 
 /**
  * Sets the view component

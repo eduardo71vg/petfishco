@@ -22,9 +22,14 @@ class Backend implements ModuleDefinitionInterface {
 				'PetFishCo\Backend\Controllers' => APP_PATH . '/backend/controllers/',
 				'PetFishCo\Backend\Models\Entities' => APP_PATH . '/backend/models/Entities/',
 				'PetFishCo\Backend\Models\Services' => APP_PATH . '/backend/models/Services/',
-				'PetFishCo\Backend\Models\Repositories' => APP_PATH . '/backend/models/Repositories/'
+				'PetFishCo\Backend\Models\Repositories' => APP_PATH . '/backend/models/Repositories/',
+				'PetFishCo\Backend\Helpers' => APP_PATH . '/backend/helpers/',
+				'PetFishCo\Backend\Transformers' => APP_PATH . '/backend/transformers/'
 			]
 		);
+		$loader->registerClasses([
+
+		]);
 		$loader->register();
 	}
 
@@ -35,14 +40,42 @@ class Backend implements ModuleDefinitionInterface {
 	 */
 	public function registerServices(DiInterface $di) {
 
-
-//		$eventsManager = $di->get(ServicesConst::EVENTS_MANAGER);
+//		$di->set('dispatcher', function() {
+//			$eventsManager = new \Phalcon\Events\Manager();
+//			$eventsManager->attach('dispatch', function($event, $dispatcher, $exception){
+//				//The controller exists but the action not
+//				if($event->getType() == 'beforeNotFoundAction') {
+//					$dispatcher->forward(array(
+//						'module'=>'frontend',
+//						'controller'=>'index',
+//						'action'=>'show404'
+//					));
+//					return false;
+//				}
+//				if($event->getType() == 'beforeException') {
+//					switch ($exception->getCode()) {
+//						case \Phalcon\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+//						case \Phalcon\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+//							$dispatcher->forward(array(
+//								'module'=>'frontend',
+//								'controller'=>'index',
+//								'action'=>'show404'
+//							));
+//							return false;
+//					}
+//				}
+//			});
+//			$dispatcher = new \Phalcon\Mvc\Dispatcher();
+//			$dispatcher->setEventsManager($eventsManager);
+//			$dispatcher->setDefaultNamespace('Modules\Frontend\Controllers');
 //
-//		/**
-//		 * NotFound handler
-//		 */
-//		$eventsManager->attach('micro', new NotFound);
-//		//$eventsManager->attach('micro', new \Core\Middleware\BeforeHandleRoute);
+//			return $dispatcher;
+//
+//		});
+
+
+
+		//$eventsManager->attach('micro', new \Core\Middleware\BeforeHandleRoute);
 //		//AUTH REMOVE for test
 //
 //		/**

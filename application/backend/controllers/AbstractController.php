@@ -2,8 +2,10 @@
 
 namespace PetFishCo\Backend\Controllers;
 
-use PetFishCo\Core\Mvc\RestRepositoryInterface;
+use PetFishCo\Backend\Models\Repositories\RestRepositoryInterface;
+use Phalcon\Http\Request;
 use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\ModelInterface;
 
 abstract class AbstractController extends Controller {
 
@@ -50,7 +52,7 @@ abstract class AbstractController extends Controller {
 			$data = $this->repository->findBy();
 		}
 
-		return $this->respond('done', $data);
+		return $this->respond('done', $data->toArray());
 	}
 
 	/**
@@ -63,7 +65,7 @@ abstract class AbstractController extends Controller {
 	public function getAction($id) {
 
 		$model = $this->repository->findOne($id);
-		if (is_null($model)) {
+		if (empty($model)) {
 			return $this->respond('not_found');
 		}
 
@@ -71,29 +73,79 @@ abstract class AbstractController extends Controller {
 	}
 
 	/**
-	 * @param Request $request
+	 * @param bool $respond
 	 *
-	 * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
-	 * @todo
+	 * @return bool|\PetFishCo\Backend\Models\Repositories\Model|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
 	 */
-	public function addAction(Request $request) {
-		$m = self::MODEL;
-		$this->validate($request, $m::$rules);
+	public function addAction($respond = true) {
 
-		return $this->respond('created', $m::create($request->all()));
+		$data = $this->request->getPost();
+
+		//validate
+		if(!$this->repository->isValid($data)){
+			$valid = false;
+			if($respond) {
+				return $this->respond('not_valid', $this->repository->getValidationErrors());
+			}
+			return false;
+		}
+
+		//save
+		$errors = [];
+		$entity = $this->repository->save($data);
+
+		if($respond) {
+			if ($entity) {
+				$response = $this->respond('created', $entity->toArray());
+			} else {
+				$response = $this->respond('not_valid', $errors);
+			}
+		}else{
+			$response = $entity;
+		}
+
+		return $response;
 	}
 
-	public function putAction(Request $request, $id) {
+	/**
+	 * @param int    $id
+	 * @param bool $respond whether or not the method will reply
+	 *
+	 * @return bool|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface|ModelInterface
+	 */
+	public function putAction($id, $respond = true) {
 
-		//TODO validate
-		//$this->validate($request, $m::$rules);
+		$data = $this->request->getPut();
+
+		//validate
+		if(!$this->repository->isValid($data)){
+			$valid = false;
+			if($respond) {
+				return $this->respond('not_valid', $this->repository->getValidationErrors());
+			}
+			return false;
+		}
+
+		/**@var $model ModelInterface*/
 		$model = $this->repository->findOne($id);
-		if (is_null($model)) {
+
+		if (empty($model) && $respond) {
 			return $this->respond('not_found');
 		}
-		$model->update($request->all());
 
-		return $this->respond('done', $model);
+		if($model) {
+			if(!$model->update($data)) {
+				if ($respond) {
+					return $this->respond('not_valid');
+				}
+				$model = false;
+			}
+		}
+
+		if($respond) {
+			return $this->respond('done', $model);
+		}
+		return $model;
 	}
 
 	/**
@@ -105,7 +157,7 @@ abstract class AbstractController extends Controller {
 	 */
 	public function removeAction($id) {
 		$model = $this->repository->findOne($id);
-		if (is_null($model)) {
+		if (empty($model)) {
 			return $this->respond('not_found');
 		}
 		$this->repository->delete($model);

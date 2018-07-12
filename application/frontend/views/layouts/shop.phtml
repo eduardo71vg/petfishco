@@ -3,7 +3,7 @@
 	<header class="bg-primary text-white not-main">
 		<div class="container text-center">
 			<h1>Aquariums</h1>
-			<p class="lead"><a class="btn btn-success" href="<?php echo $this->url->get('/aquarium/add'); ?>" role="button">Add New</a></p>
+			<p class="lead"><a class="btn btn-success" href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/add'); ?>" role="button">Add New</a></p>
 		</div>
 	</header>
 
@@ -13,6 +13,7 @@
           <div class="col-lg-8 mx-auto ">
 <!--            <h2 class="">Aquariums</h2>-->
 <!--            <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>-->
+	          <?php $this->partial("flash_messages"); ?>
 	          <div class="table-responsive">
 		          <?php
 		          if(isset($aquariums) && count($aquariums) > 0 ) :
@@ -24,13 +25,15 @@
 						  <th scope="col">Capacity</th>
 						  <th scope="col">Shape</th>
 						  <th scope="col">Material</th>
+						  <th scope="col">Stock</th>
 						  <th scope="col">Created</th>
+						  <th scope="col">Updated</th>
 						  <th scope="col">Operations</th>
 					  </tr>
 				  </thead>
 				  <tbody>
 				   <?php
-						  /**@var $aquarium \PetFishCo\Frontend\Models\DTO\Aquarium*/
+						  /**@var $aquarium \PetFishCo\Frontend\Models\DTO\AquariumInstance*/
 						  /**@var $shop \PetFishCo\Frontend\Models\DTO\Shop*/
 					  foreach ($aquariums as $index => $aquarium): ?>
 						  <tr>
@@ -38,10 +41,12 @@
 							  <td><?php echo $aquarium->getCapacity($shop->getMeasureSystem());?></td>
 							  <td><?php echo $aquarium->getAquariumShape();?></td>
 							  <td><?php echo $aquarium->getAquariumMaterial();?></td>
+							  <td><?php echo $aquarium->getAmount();?></td>
 							  <td><?php echo $aquarium->getCreatedAt();?></td>
+							  <td><?php echo $aquarium->getUpdatedAt();?></td>
 							  <td>
-								  <a href="<?php echo $this->url->get('/aquarium/' . $aquarium->getId()); ?>">View</a>
-								  <a href="<?php echo $this->url->get('/aquarium/' . $aquarium->getId() . '/edit'); ?>">Edit</a>
+								  <a href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId()); ?>">View</a>
+								  <a href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId() . '/edit'); ?>">Edit</a>
 							  </td>
 						  </tr>
 					  <?php endforeach; ?>

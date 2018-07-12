@@ -37,6 +37,12 @@ class Fish extends BaseDTO
      */
     protected $fish_specie_id;
 
+	/**
+	 *
+	 * @var integer
+	 */
+	protected $stock;
+
     /**
      *
      * @var string
@@ -97,19 +103,6 @@ class Fish extends BaseDTO
     public function setFins($fins)
     {
         $this->fins = $fins;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field fish_specie_id
-     *
-     * @param integer $fish_specie_id
-     * @return $this
-     */
-    public function setFishSpecieId($fish_specie_id)
-    {
-        $this->fish_specie_id = $fish_specie_id;
 
         return $this;
     }
@@ -180,15 +173,6 @@ class Fish extends BaseDTO
         return $this->fins;
     }
 
-    /**
-     * Returns the value of field fish_specie_id
-     *
-     * @return integer
-     */
-    public function getFishSpecieId()
-    {
-        return $this->fish_specie_id;
-    }
 
     /**
      * Returns the value of field created_at
@@ -209,4 +193,34 @@ class Fish extends BaseDTO
     {
         return $this->deleted;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getFishSpecie() {
+		return $this->fish_specie_id;
+	}
+
+	/**
+	 * @param string $fish_specie
+	 */
+	public function setFishSpecie($fish_specie) {
+		$this->fish_specie = $fish_specie;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStock() {
+		return $this->stock;
+	}
+
+	/**
+	 * @param int $amount
+	 */
+	public function setStock($stock) {
+		$this->stock = $stock;
+	}
+
+
 }

@@ -1,5 +1,5 @@
 <?php
-namespace PetFishCo\Core\Mvc;
+namespace PetFishCo\Backend\Models\Repositories;
 
 /**
  * Interface RepositoryInterface
@@ -71,4 +71,17 @@ interface RestRepositoryInterface {
 	 * @return mixed
 	 */
 	public function delete(\Phalcon\Mvc\ModelInterface $model);
+
+
+	/**
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
+	public function isValid(array $data);
+
+	/**
+	 * @return array
+	 */
+	public function getValidationErrors();
 }

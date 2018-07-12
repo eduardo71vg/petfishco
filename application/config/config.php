@@ -18,6 +18,7 @@ return new \Phalcon\Config(array(
     ),
     'api' => [
     	'base_url' => getenv('API_BASE_URL')
-	]
+	],
+    'dbProfiler' => 1
 
 ));
