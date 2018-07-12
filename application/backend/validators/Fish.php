@@ -3,7 +3,7 @@ namespace PetFishCo\Backend\Validators;
 
 use \PetFishCo\Backend\Models\Services\Aquarium as AquariumService;
 
-class FishValidator {
+class Fish {
 
 	const SPECIE_GUPPIE = 1;
 

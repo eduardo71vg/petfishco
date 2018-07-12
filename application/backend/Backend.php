@@ -24,7 +24,8 @@ class Backend implements ModuleDefinitionInterface {
 				'PetFishCo\Backend\Models\Services' => APP_PATH . '/backend/models/Services/',
 				'PetFishCo\Backend\Models\Repositories' => APP_PATH . '/backend/models/Repositories/',
 				'PetFishCo\Backend\Helpers' => APP_PATH . '/backend/helpers/',
-				'PetFishCo\Backend\Transformers' => APP_PATH . '/backend/transformers/'
+				'PetFishCo\Backend\Transformers' => APP_PATH . '/backend/transformers/',
+				'PetFishCo\Backend\Validators' => APP_PATH . '/backend/validators/'
 			]
 		);
 		$loader->registerClasses([

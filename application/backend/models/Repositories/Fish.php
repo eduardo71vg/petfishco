@@ -1,8 +1,7 @@
 <?php
 namespace PetFishCo\Backend\Models\Repositories;
 
-
-use PetFishCo\Backend\Validators\FishValidator;
+use PetFishCo\Backend\Validators\Fish as FishValidator;
 
 class Fish extends BaseRepository implements RestRepositoryInterface {
 
