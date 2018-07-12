@@ -157,7 +157,7 @@ class Shop extends BaseModel
      */
     public function initialize()
     {
-        $this->hasMany('id', 'PetFishCo\Models\Entity\Aquarium', 'shop_id', array('alias' => 'Aquarium'));
+        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Aquarium_instance', 'shop_id', array('alias' => 'Aquarium_instance'));
     }
 
     public function getSource()

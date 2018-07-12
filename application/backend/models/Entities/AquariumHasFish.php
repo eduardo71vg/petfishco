@@ -11,7 +11,7 @@ class AquariumHasFish extends BaseModel
      *
      * @var integer
      */
-    protected $aquarium_id;
+    protected $aquarium_instance_id;
 
     /**
      *
@@ -25,6 +25,12 @@ class AquariumHasFish extends BaseModel
      */
     protected $fish_id;
 
+	/**
+	 *
+	 * @var integer
+	 */
+	protected $stock;
+
     /**
      *
      * @var string
@@ -32,14 +38,14 @@ class AquariumHasFish extends BaseModel
     protected $created_at;
 
     /**
-     * Method to set the value of field aquarium_id
+     * Method to set the value of field aquarium_instance_id
      *
-     * @param integer $aquarium_id
+     * @param integer $aquarium_instance_id
      * @return $this
      */
-    public function setAquariumId($aquarium_id)
+    public function setAquariumInstanceId($aquarium_instance_id)
     {
-        $this->aquarium_id = $aquarium_id;
+        $this->aquarium_instance_id = $aquarium_instance_id;
 
         return $this;
     }
@@ -84,13 +90,13 @@ class AquariumHasFish extends BaseModel
     }
 
     /**
-     * Returns the value of field aquarium_id
+     * Returns the value of field aquarium_instance_id
      *
      * @return integer
      */
-    public function getAquariumId()
+    public function getAquariumInstanceId()
     {
-        return $this->aquarium_id;
+        return $this->aquarium_instance_id;
     }
 
     /**
@@ -123,13 +129,29 @@ class AquariumHasFish extends BaseModel
         return $this->created_at;
     }
 
+	/**
+	 * @return int
+	 */
+	public function getStock() {
+		return $this->stock;
+	}
+
+	/**
+	 * @param int $stock
+	 */
+	public function setStock($stock) {
+		$this->stock = $stock;
+	}
+
+
+
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-        $this->belongsTo('aquarium_id', 'PetFishCo\Models\Entity\Aquarium', 'id', array('alias' => 'Aquarium'));
-        $this->belongsTo('fish_id', 'PetFishCo\Models\Entity\Fish', 'id', array('alias' => 'Fish'));
+        $this->belongsTo('aquarium_instance_id', 'PetFishCo\Backend\Models\Entities\Aquarium_instance', 'id', array('alias' => 'Aquarium_instance'));
+        $this->belongsTo('fish_id', 'PetFishCo\Backend\Models\Entities\Fish', 'id', array('alias' => 'Fish'));
     }
 
     public function getSource()
@@ -146,9 +168,10 @@ class AquariumHasFish extends BaseModel
     public function columnMap()
     {
         return array(
-            'aquarium_id' => 'aquarium_id', 
+            'aquarium_instance_id' => 'aquarium_instance_id', 
             'shop_id' => 'shop_id', 
             'fish_id' => 'fish_id', 
+            'stock' => 'stock',
             'created_at' => 'created_at'
         );
     }

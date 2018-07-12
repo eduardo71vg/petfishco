@@ -1,0 +1,48 @@
+<?php /**@var $form \Phalcon\Forms\Form*/ ?>
+<header class="bg-primary text-white not-main">
+	<div class="container text-center">
+		<h1>Add Aquarium Shop <?php echo (!empty($shop)) ? $shop->getId() : '';?></h1>
+	</div>
+</header>
+
+<section id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto ">
+				<h2 class="text-center">Add Aquarium</h2>
+				<?php $this->getContent(); ?>
+
+				<?php $this->tag->form("products/create"); ?>
+
+				<ul class="pager">
+<!--					<li class="previous pull-left">-->
+<!--						--><?php //link_to("products", "&larr; Go Back") ?>
+<!--					</li>-->
+					<li class="pull-right">
+						<?php $this->tag->submitButton("Save", ["class" => "btn btn-success"]); ?>
+					</li>
+				</ul>
+
+				<fieldset>
+
+					<?php foreach ($form->getElements() as $index => $element) : ?>
+					<?php if(is_a($element, 'Phalcon\Forms\Element\Hidden')): ?>
+					<?php $element ?>
+					<?php else: ?>
+					<div class="form-group">
+						<?php $element->getLabel() ?>
+						<?php $element->render(['class'=> 'form-control']) ?>
+					</div>
+					<?php endif; ?>
+					<?php endforeach; ?>
+
+				</fieldset>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+

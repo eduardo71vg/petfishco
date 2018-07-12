@@ -1,9 +1,9 @@
 <?php /**@var $aquarium \PetFishCo\Frontend\Models\DTO\Aquarium*/ ?>
+
 <header class="bg-primary text-white not-main">
 	<div class="container text-center">
-		<h1>Aquarium <?php echo (!empty($aquarium)) ? $aquarium->getId() : '';?></h1>
-		<?php  if(isset($aquarium)) :?>
-			<div class="table-responsive">
+		<h1>Aquarium <?php echo $aquarium->getId()?></h1>
+		<div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
@@ -23,11 +23,8 @@
 				</tbody>
 			</table>
 		</div>
-		<?php  endif; ?>
 	</div>
-	<?php  if(isset($aquarium)) :?>
-		<p class="lead text-center"><a class="btn btn-success" href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/'.$aquarium->getId().'/fish/add'); ?>" role="button">Add Fishes</a></p>
-	<?php  endif; ?>
+	<p class="lead text-center"><a class="btn btn-success" href="<?php echo $this->url->get('/aquarium/'.$aquarium->getId().'/fish/add'); ?>" role="button">Add Fishes</a></p>
 </header>
 
 <section id="about">
@@ -37,7 +34,7 @@
 				<h2 class="text-center">Fishes</h2>
 				<div class="table-responsive">
 					<?php
-					if(isset($aquarium) && isset($fishes) && count($fishes) > 0 ) :
+					if(isset($fishes) && count($fishes) > 0 ) :
 						?>
 						<table class="table">
 							<thead>
@@ -62,12 +59,12 @@
 										<td><?php echo $fish->getAlias();?></td>
 										<td><?php echo $fish->getColor();?></td>
 										<td><?php echo $fish->getFins();?></td>
-										<td><?php echo $fish->getFishSpecie();?></td>
+										<td><?php echo $fish->getSpecie();?></td>
 										<td><?php echo $fish->getStock();?></td>
 										<td><?php echo $fish->getCreatedAt();?></td>
-										<td class="text-center">
-<!--											<a href="--><?php //echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId() . '/fish/'. $fish->getId()); ?><!--">View</a>-->
-											<a  href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId() . '/fish/'. $fish->getId() . '/edit'); ?>">Edit</a>
+										<td>
+											<a href="<?php echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId()); ?>">View</a>
+											<a href="<?php echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId() . '/edit'); ?>">Edit</a>
 										</td>
 									</tr>
 								<?php endforeach; ?>
@@ -80,5 +77,4 @@
 		</div>
 	</div>
 </section>
-
 

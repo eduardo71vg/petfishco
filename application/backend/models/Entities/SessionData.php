@@ -4,24 +4,24 @@ namespace PetFishCo\Backend\Models\Entities;
 
 use PetFishCo\Core\Mvc\BaseModel;
 
-class AquariumShape extends BaseModel
+class SessionData extends BaseModel
 {
 
     /**
      *
+     * @var string
+     */
+    protected $session_id;
+
+    /**
+     *
+     * @var string
+     */
+    protected $data;
+
+    /**
+     *
      * @var integer
-     */
-    protected $id;
-
-    /**
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
-     *
-     * @var string
      */
     protected $created_at;
 
@@ -29,30 +29,30 @@ class AquariumShape extends BaseModel
      *
      * @var integer
      */
-    protected $deleted;
+    protected $modified_at;
 
     /**
-     * Method to set the value of field id
+     * Method to set the value of field session_id
      *
-     * @param integer $id
+     * @param string $session_id
      * @return $this
      */
-    public function setId($id)
+    public function setSessionId($session_id)
     {
-        $this->id = $id;
+        $this->session_id = $session_id;
 
         return $this;
     }
 
     /**
-     * Method to set the value of field name
+     * Method to set the value of field data
      *
-     * @param string $name
+     * @param string $data
      * @return $this
      */
-    public function setName($name)
+    public function setData($data)
     {
-        $this->name = $name;
+        $this->data = $data;
 
         return $this;
     }
@@ -60,7 +60,7 @@ class AquariumShape extends BaseModel
     /**
      * Method to set the value of field created_at
      *
-     * @param string $created_at
+     * @param integer $created_at
      * @return $this
      */
     public function setCreatedAt($created_at)
@@ -71,42 +71,42 @@ class AquariumShape extends BaseModel
     }
 
     /**
-     * Method to set the value of field deleted
+     * Method to set the value of field modified_at
      *
-     * @param integer $deleted
+     * @param integer $modified_at
      * @return $this
      */
-    public function setDeleted($deleted)
+    public function setModifiedAt($modified_at)
     {
-        $this->deleted = $deleted;
+        $this->modified_at = $modified_at;
 
         return $this;
     }
 
     /**
-     * Returns the value of field id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns the value of field name
+     * Returns the value of field session_id
      *
      * @return string
      */
-    public function getName()
+    public function getSessionId()
     {
-        return $this->name;
+        return $this->session_id;
+    }
+
+    /**
+     * Returns the value of field data
+     *
+     * @return string
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
      * Returns the value of field created_at
      *
-     * @return string
+     * @return integer
      */
     public function getCreatedAt()
     {
@@ -114,26 +114,18 @@ class AquariumShape extends BaseModel
     }
 
     /**
-     * Returns the value of field deleted
+     * Returns the value of field modified_at
      *
      * @return integer
      */
-    public function getDeleted()
+    public function getModifiedAt()
     {
-        return $this->deleted;
-    }
-
-    /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Aquarium', 'aquarium_shape_id', array('alias' => 'Aquarium'));
+        return $this->modified_at;
     }
 
     public function getSource()
     {
-        return 'aquarium_shape';
+        return 'session_data';
     }
 
     /**
@@ -145,10 +137,10 @@ class AquariumShape extends BaseModel
     public function columnMap()
     {
         return array(
-            'id' => 'id', 
-            'name' => 'name', 
+            'session_id' => 'session_id', 
+            'data' => 'data', 
             'created_at' => 'created_at', 
-            'deleted' => 'deleted'
+            'modified_at' => 'modified_at'
         );
     }
 

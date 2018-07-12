@@ -128,7 +128,7 @@ class FishSpecie extends BaseModel
      */
     public function initialize()
     {
-        $this->hasMany('id', 'PetFishCo\Models\Entity\Fish', 'fish_specie_id', array('alias' => 'Fish'));
+        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Fish', 'fish_specie_id', array('alias' => 'Fish'));
     }
 
     public function getSource()

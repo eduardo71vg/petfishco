@@ -23,12 +23,6 @@ class Aquarium extends BaseModel
      *
      * @var integer
      */
-    protected $shop_id;
-
-    /**
-     *
-     * @var integer
-     */
     protected $aquarium_shape_id;
 
     /**
@@ -76,19 +70,6 @@ class Aquarium extends BaseModel
     }
 
     /**
-     * Method to set the value of field shop_id
-     *
-     * @param integer $shop_id
-     * @return $this
-     */
-    public function setShopId($shop_id)
-    {
-        $this->shop_id = $shop_id;
-
-        return $this;
-    }
-
-    /**
      * Method to set the value of field aquarium_shape_id
      *
      * @param integer $aquarium_shape_id
@@ -107,7 +88,7 @@ class Aquarium extends BaseModel
      * @param integer $aquarium_material_id
      * @return $this
      */
-    public function setAcquariumMaterialId($aquarium_material_id)
+    public function setAquariumMaterialId($aquarium_material_id)
     {
         $this->aquarium_material_id = $aquarium_material_id;
 
@@ -161,16 +142,6 @@ class Aquarium extends BaseModel
     }
 
     /**
-     * Returns the value of field shop_id
-     *
-     * @return integer
-     */
-    public function getShopId()
-    {
-        return $this->shop_id;
-    }
-
-    /**
      * Returns the value of field aquarium_shape_id
      *
      * @return integer
@@ -215,10 +186,9 @@ class Aquarium extends BaseModel
      */
     public function initialize()
     {
-        $this->hasMany('id', 'PetFishCo\Models\Entity\Aquarium_has_fish', 'aquarium_id', array('alias' => 'Aquarium_has_fish'));
-        $this->belongsTo('aquarium_material_id', 'PetFishCo\Models\Entity\Aquarium_material', 'id', array('alias' => 'Acquarium_material'));
-        $this->belongsTo('aquarium_shape_id', 'PetFishCo\Models\Entity\Aquarium_shape', 'id', array('alias' => 'Aquarium_shape'));
-        $this->belongsTo('shop_id', 'PetFishCo\Models\Entity\Shop', 'id', array('alias' => 'Shop'));
+        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Aquarium_instance', 'aquarium_id', array('alias' => 'Aquarium_instance'));
+        $this->belongsTo('aquarium_material_id', 'PetFishCo\Backend\Models\Entities\Aquarium_material', 'id', array('alias' => 'Aquarium_material'));
+        $this->belongsTo('aquarium_shape_id', 'PetFishCo\Backend\Models\Entities\Aquarium_shape', 'id', array('alias' => 'Aquarium_shape'));
     }
 
     public function getSource()
@@ -237,9 +207,8 @@ class Aquarium extends BaseModel
         return array(
             'id' => 'id', 
             'capacity' => 'capacity', 
-            'shop_id' => 'shop_id', 
             'aquarium_shape_id' => 'aquarium_shape_id', 
-            'aquarium_material_id' => 'aquarium_material_id',
+            'aquarium_material_id' => 'aquarium_material_id', 
             'created_at' => 'created_at', 
             'deleted' => 'deleted'
         );

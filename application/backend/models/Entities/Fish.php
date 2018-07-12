@@ -215,8 +215,8 @@ class Fish extends BaseModel
      */
     public function initialize()
     {
-        $this->hasMany('id', 'PetFishCo\Models\Entity\Aquarium_has_fish', 'fish_id', array('alias' => 'Aquarium_has_fish'));
-        $this->belongsTo('fish_specie_id', 'PetFishCo\Models\Entity\Fish_specie', 'id', array('alias' => 'Fish_specie'));
+        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Aquarium_has_fish', 'fish_id', array('alias' => 'Aquarium_has_fish'));
+        $this->belongsTo('fish_specie_id', 'PetFishCo\Backend\Models\Entities\Fish_specie', 'id', array('alias' => 'Fish_specie'));
     }
 
     public function getSource()

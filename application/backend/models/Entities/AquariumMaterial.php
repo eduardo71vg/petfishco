@@ -128,7 +128,7 @@ class AquariumMaterial extends BaseModel
      */
     public function initialize()
     {
-        $this->hasMany('id', 'PetFishCo\Models\Entity\Aquarium', 'aquarium_material_id', array('alias' => 'Aquarium'));
+        $this->hasMany('id', 'PetFishCo\Backend\Models\Entities\Aquarium', 'aquarium_material_id', array('alias' => 'Aquarium'));
     }
 
     public function getSource()

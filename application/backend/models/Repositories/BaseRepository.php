@@ -58,7 +58,7 @@ class BaseRepository implements RestRepositoryInterface {
 	 * @inheritdoc
 	 */
 	public function findOne($id) {
-		return $this->findOneBy(['id' => $id]);
+		return $this->findOneBy(['id = :id:', 'bind' => ['id' => $id]]);
 	}
 
 	/**
@@ -79,11 +79,15 @@ class BaseRepository implements RestRepositoryInterface {
 
 		$query = ($this->model)::query()->createBuilder()->where('deleted = 0');
 
+		if(isset($searchCriteria['columns'])){
+			$query->columns($searchCriteria['columns']);
+		}
+
 		$queryBuilder = $this->applySearchCriteriaInQueryBuilder($query, $searchCriteria);
 
 		// Get the paginated results
 		$page = $this->paginate($queryBuilder, $limit, $currentPage);
-		$rows = $page->items->toArray();
+		$rows = $page->items; //->toArray();
 		return $rows;
 	}
 
