@@ -9,6 +9,8 @@ class AquariumHasFish extends \Phalcon\Mvc\User\Component {
 	 * @param string $fish_id
 	 * @param string $shop_id
 	 * @param string $aquarium_instance_id
+	 *
+	 * @return \PetFishCo\Backend\Models\Entities\AquariumHasFish $aquariumHasFish
 	 */
 	public function getByShopFishAndAqInstance($fish_id, $shop_id, $aquarium_instance_id){
 

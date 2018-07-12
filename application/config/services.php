@@ -29,20 +29,6 @@ $di['db'] = function () use ($config) {
 
 	$eventsManager = new EventsManager();
 
-//	$logger = new FileLogger(APP_PATH.'/logs/sql.log');
-//
-//	// Listen all the database events
-//	$eventsManager->attach(
-//		'db:beforeQuery',
-//		function ($event, $connection) use ($logger) {
-//			$logger->log(
-//				$connection->getSQLStatement(),
-//				\Phalcon\Logger::INFO
-//			);
-//		}
-//	);
-
-
 	$eventsManager->attach('db', new \PetFishCo\Middlewares\DbQuery());
 
 	$connection = new DbAdapter($config->database->toArray());
@@ -67,7 +53,7 @@ $di->set('view', function() {
 
 $di->setShared('config', $config);
 
-if($config->get('environment') == 'local'){
+if($config->get('environment') == 'local' && !defined('IS_UNIT_TEST') ){
 	$debug = new \Phalcon\Debug();
 	$debug->listen();
 }

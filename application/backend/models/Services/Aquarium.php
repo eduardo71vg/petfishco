@@ -16,7 +16,7 @@ use PetFishCo\Backend\Models\Repositories\AquariumShape;
 class Aquarium extends \Phalcon\Mvc\User\Component {
 
 	/**
-	 * @param int $aquarium_id
+	 * @param int $aquarium_instance_id
 	 *
 	 * @return array
 	 */
@@ -71,45 +71,6 @@ class Aquarium extends \Phalcon\Mvc\User\Component {
 	}
 
 	/**
-	 * @param int $aquarium_id
-	 *
-	 * @return array
-	 */
-//	public function getById($aquarium_id){
-//
-//		$aquarium_repository = new AquariumRepo(new AquariumInstance());
-//		$queryBuilder = $aquarium_repository->getBaseBuilder();
-//		$queryBuilder = $queryBuilder->where('a.id = :aquarium_id:', ['aquarium_id' => $aquarium_id]);
-//
-//		return $queryBuilder->getQuery()->execute();
-//	}
-
-//	/**
-//	 * @param int           $id
-//	 * @param DTOInterface $aquariumInstance
-//	 *
-//	 * @return array
-//	 */
-//	public function getByInstanceId($id, ModelInterface $aquariumInstance){
-//
-//		$aquarium_repository = new AquariumInstanceRepo(new AquariumInstance());
-//
-//		//fetching aquarium
-//		$queryBuilder = $aquarium_repository->getBaseBuilder();
-//		$queryBuilder = $queryBuilder
-//			->where('a.id = :aquarium_id:',
-//				['aquarium_id' => $aquariumInstance->aquarium_id]
-//			);
-//		$aquarium = $queryBuilder->getQuery()->execute();
-//		$aquariumData = [];
-//		if(!empty($aquarium)) {
-//			$aquariumData = array_merge($aquarium[0]->toArray(), $aquariumInstance->toArray());
-//		}
-//
-//		return $aquariumData;
-//	}
-
-	/**
 	 * @return mixed
 	 */
 	public function getBaseBuilder(){
@@ -132,30 +93,6 @@ class Aquarium extends \Phalcon\Mvc\User\Component {
 		$aquariums = $builder->where('ai.shop_id = :shop_id: and am.deleted = 0', ['shop_id' => $shop_id])
 			->getQuery()
 			->execute();
-//		$aquariums = $builder->from(['ai' => AquariumInstanceModel::class])
-//			->join(AquariumModel::class, 'am.id = aquarium_id', 'am')
-//			->where('ai.shop_id = :shop_id: and am.deleted = 0', ['shop_id' => $shop_id])
-//			->orderBy('ai.created_at')
-//			->columns('ai.id ,ai.amount, ai.shop_id, ai.created_at, ai.updated_at , am.capacity, am.aquarium_shape_id , am.aquarium_material_id')
-//			->getQuery()
-//			->execute();
-		//
-		//		$aquariums = AquariumInstanceModel::query()
-		//			->columns(['am.*', 'amount'])
-		//			->join(AquariumModel::class, 'am.id = aquarium_id', 'am')
-		//			->where(AquariumInstanceModel::class.'.shop_id = :shop_id:', ['shop_id' => $shop_id])
-		//			->orderBy(AquariumInstanceModel::class.'.created_at')
-		//			->execute();
-
-		//		$aquariums = $this->modelManager->queryBuilder()
-		//			->from('AquariumInstance')
-		//			->innerJoin('Aquarium', 'AquariumInstance.aquarium_id = Aquarium.id', 'v')
-		//			->where('AquariumInstance.shop_id = :shop_id:')
-		//			->bind(['shop_id' => $shop_id])
-		//			->orderBy('AquariumInstance.created_at')
-		//			->getquery()
-		//			->execute();
-
 
 		$data = $this->bindOptionTables($aquariums);
 

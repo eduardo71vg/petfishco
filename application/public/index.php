@@ -53,23 +53,6 @@ try {
      */
     include APP_PATH . '/config/routes.php';
 
-
-//$dispatcher = $di["dispatcher"];
-//try {
-//	// Dispatch the request
-//	$dispatcher->dispatch();
-//} catch (Exception $e) {
-//	// An exception has occurred, dispatch some controller/action aimed for that
-//	echo '<pre>';
-//	print_r($e);exit;
-//	// Pass the processed router parameters to the dispatcher
-//	$dispatcher->setControllerName("errors");
-//	$dispatcher->setActionName("action503");
-//
-//	// Dispatch the request
-//	$dispatcher->dispatch();
-//}
-
 	 /**
      * Handle the request
      */
