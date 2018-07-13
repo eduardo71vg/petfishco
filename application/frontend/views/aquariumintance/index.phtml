@@ -1,80 +1,81 @@
-<?php /**@var $aquarium \PetFishCo\Frontend\Models\DTO\Aquarium*/ ?>
-
-<header class="bg-primary text-white not-main">
-	<div class="container text-center">
-		<h1>Aquarium <?php echo $aquarium->getId()?></h1>
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">Capacity</th>
-						<th scope="col">Shape</th>
-						<th scope="col">Material</th>
-						<th scope="col">Created</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><?php echo $aquarium->getCapacity(); ?></th>
-						<td><?php echo $aquarium->getAquariumShape(); ?></td>
-						<td><?php echo $aquarium->getAquariumMaterial(); ?></td>
-						<td><?php echo $aquarium->getCreatedAt(); ?></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<p class="lead text-center"><a class="btn btn-success" href="<?php echo $this->url->get('/aquarium/'.$aquarium->getId().'/fish/add'); ?>" role="button">Add Fishes</a></p>
-</header>
-
-<section id="about">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 mx-auto ">
-				<h2 class="text-center">Fishes</h2>
-				<div class="table-responsive">
-					<?php
-					if(isset($fishes) && count($fishes) > 0 ) :
-						?>
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">Alias</th>
-									<th scope="col">Color</th>
-									<th scope="col">Fins</th>
-									<th scope="col">Specie</th>
-									<th scope="col">Stock</th>
-									<th scope="col">Created</th>
-									<th scope="col">Operations</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								/**@var $fish \PetFishCo\Frontend\Models\DTO\Fish*/
-								/**@var $shop \PetFishCo\Frontend\Models\DTO\Shop*/
-								foreach ($fishes as $index => $fish): ?>
-									<tr>
-										<th scope="row"><?php echo $fish->getId();?></th>
-										<td><?php echo $fish->getAlias();?></td>
-										<td><?php echo $fish->getColor();?></td>
-										<td><?php echo $fish->getFins();?></td>
-										<td><?php echo $fish->getSpecie();?></td>
-										<td><?php echo $fish->getStock();?></td>
-										<td><?php echo $fish->getCreatedAt();?></td>
-										<td>
-											<a href="<?php echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId()); ?>">View</a>
-											<a href="<?php echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId() . '/edit'); ?>">Edit</a>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-
-							</tbody>
-						</table>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
+<?php ///**@var $aquarium \PetFishCo\Frontend\Models\DTO\Aquarium*/ ?>
+<!---->
+<!--<header class="bg-primary text-white not-main">-->
+<!--	<div class="container text-center">-->
+<!--		<h1>Aquarium --><?php //echo $aquarium->getId()?><!--</h1>-->
+<!--		<div class="table-responsive">-->
+<!--			<table class="table">-->
+<!--				<thead>-->
+<!--					<tr>-->
+<!--						<th scope="col">Capacity</th>-->
+<!--						<th scope="col">Shape</th>-->
+<!--						<th scope="col">Material</th>-->
+<!--						<th scope="col">Created</th>-->
+<!--					</tr>-->
+<!--				</thead>-->
+<!--				<tbody>-->
+<!--					<tr>-->
+<!--						<td>--><?php //echo $aquarium->getCapacity(); ?><!--</th>-->
+<!--						<td>--><?php //echo $aquarium->getAquariumShape(); ?><!--</td>-->
+<!--						<td>--><?php //echo $aquarium->getAquariumMaterial(); ?><!--</td>-->
+<!--						<td>--><?php //echo $aquarium->getCreatedAt(); ?><!--</td>-->
+<!--					</tr>-->
+<!--				</tbody>-->
+<!--			</table>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--	<p class="lead text-center"><a class="btn btn-success" href="--><?php //echo $this->url->get('/aquarium/'.$aquarium->getId().'/fish/add'); ?><!--" role="button">Add Fishes</a></p>-->
+<!--</header>-->
+<!---->
+<!--<section id="about">-->
+<!--	<div class="container">-->
+<!--		<div class="row">-->
+<!--			<div class="col-lg-8 mx-auto ">-->
+<!--				<h2 class="text-center">Fishes</h2>-->
+<!--				--><?php //$this->partial("breadcrumb"); ?>
+<!--				<div class="table-responsive">-->
+<!--					--><?php
+//					if(isset($fishes) && count($fishes) > 0 ) :
+//						?>
+<!--						<table class="table">-->
+<!--							<thead>-->
+<!--								<tr>-->
+<!--									<th scope="col">ID</th>-->
+<!--									<th scope="col">Alias</th>-->
+<!--									<th scope="col">Color</th>-->
+<!--									<th scope="col">Fins</th>-->
+<!--									<th scope="col">Specie</th>-->
+<!--									<th scope="col">Stock</th>-->
+<!--									<th scope="col">Created</th>-->
+<!--									<th scope="col">Operations</th>-->
+<!--								</tr>-->
+<!--							</thead>-->
+<!--							<tbody>-->
+<!--								--><?php
+//								/**@var $fish \PetFishCo\Frontend\Models\DTO\Fish*/
+//								/**@var $shop \PetFishCo\Frontend\Models\DTO\Shop*/
+//								foreach ($fishes as $index => $fish): ?>
+<!--									<tr>-->
+<!--										<th scope="row">--><?php //echo $fish->getId();?><!--</th>-->
+<!--										<td>--><?php //echo $fish->getAlias();?><!--</td>-->
+<!--										<td>--><?php //echo $fish->getColor();?><!--</td>-->
+<!--										<td>--><?php //echo $fish->getFins();?><!--</td>-->
+<!--										<td>--><?php //echo $fish->getSpecie();?><!--</td>-->
+<!--										<td>--><?php //echo $fish->getStock();?><!--</td>-->
+<!--										<td>--><?php //echo $fish->getCreatedAt();?><!--</td>-->
+<!--										<td>-->
+<!--											<a href="--><?php //echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId()); ?><!--">View</a>-->
+<!--											<a href="--><?php //echo $this->url->get('/aquarium_instance/' . $aquarium->getId() . '/fish/'. $fish->getId() . '/edit'); ?><!--">Edit</a>-->
+<!--										</td>-->
+<!--									</tr>-->
+<!--								--><?php //endforeach; ?>
+<!---->
+<!--							</tbody>-->
+<!--						</table>-->
+<!--					--><?php //endif; ?>
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</section>-->
+<!---->

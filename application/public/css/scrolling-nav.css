@@ -39,3 +39,11 @@ header.notmain{
   stroke: currentColor;
   fill: currentColor;
 }
+
+.netherlands input[type='image']{
+  max-height: 117px;
+}
+
+.navbar-brand .badge{
+  background: deepskyblue;
+}

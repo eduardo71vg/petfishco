@@ -35,6 +35,7 @@
 		<div class="row">
 			<div class="col-lg-8 mx-auto ">
 				<h2 class="text-center">Fishes</h2>
+				<?php $this->partial("breadcrumb"); ?>
 				<?php $this->partial("flash_messages"); ?>
 				<div class="table-responsive">
 					<?php
@@ -59,11 +60,11 @@
 								/**@var $shop \PetFishCo\Frontend\Models\DTO\Shop*/
 								foreach ($fishes as $index => $fish): ?>
 									<tr>
-										<th scope="row"><?php echo $fish->getId();?></th>
+										<th scope="row">1 <?php echo $fish->getId();?></th>
 										<td><?php echo $fish->getAlias();?></td>
 										<td><?php echo $fish->getColor();?></td>
 										<td><?php echo $fish->getFins();?></td>
-										<td><?php echo $fish->getFishSpecie();?></td>
+										<td><?php echo $species[$fish->getFishSpecie()]->getName();?></td>
 										<td><?php echo $fish->getStock();?></td>
 										<td><?php echo $fish->getCreatedAt();?></td>
 										<td class="text-center">
