@@ -1,8 +1,8 @@
 # PetFish Co
 
-![Demo 1](/application/public/img/system/petfishco1.png)
+![Demo 1](/application/public/img/system/petfishco.png)
 
-![Demo 2](/application/public/img/system/petfishco2.png)
+![Demo 2](/application/public/img/system/petfishco1.png)
 
 ## Solution
 
