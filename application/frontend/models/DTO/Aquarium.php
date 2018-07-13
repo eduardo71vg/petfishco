@@ -136,7 +136,7 @@ class Aquarium extends BaseDTO
     public function getCapacity($measure_system = 'D')
     {
     	if($measure_system == 'I'){
-			return UnitsConverter::formatLitersOutput(UnitsConverter::litersToGallons($this->capacity));
+			return UnitsConverter::formatGallonsOutput(UnitsConverter::litersToGallons($this->capacity));
 	    }
 
         return UnitsConverter::formatLitersOutput($this->capacity);

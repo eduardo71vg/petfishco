@@ -4,6 +4,9 @@ namespace PetFishCo\Frontend\Helpers;
 
 class UnitsConverter {
 
+	const SYSTEM_DECIMAL = 'D';
+	const SYSTEM_IMPERIAL = 'I';
+
 	/**
 	 * @param float $liters
 	 *
@@ -11,7 +14,7 @@ class UnitsConverter {
 	 */
 	public static function litersToGallons($liters) {
 
-		return number_format($liters * 0,264172, 2) ;
+		return number_format($liters * 0.264172, 2) ;
 	}
 
 	/**

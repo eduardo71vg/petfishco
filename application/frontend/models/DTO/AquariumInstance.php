@@ -3,6 +3,7 @@
 namespace PetFishCo\Frontend\Models\DTO;
 
 use PetFishCo\Core\Mvc\BaseDTO;
+use PetFishCo\Frontend\Helpers\UnitsConverter;
 
 class AquariumInstance extends BaseDTO
 {
@@ -64,8 +65,12 @@ class AquariumInstance extends BaseDTO
 	/**
 	 * @return int
 	 */
-	public function getCapacity() {
-		return $this->capacity;
+	public function getCapacity($measure_system) {
+		if($measure_system == 'I'){
+			return UnitsConverter::formatGallonsOutput(UnitsConverter::litersToGallons($this->capacity));
+		}
+
+		return UnitsConverter::formatLitersOutput($this->capacity);
 	}
 
 	/**
