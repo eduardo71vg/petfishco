@@ -12,16 +12,20 @@ class Fish extends BaseRepository implements RestRepositoryInterface {
 	public function isValid(array $data) {
 
 		if(!isset($data['aquarium_instance_id'])){
+			$this->validationErrors[] = 'aquarium instance id required';
 			return false;
 		}
 
 		if(!isset($data['fish_specie_id'])){
+			$this->validationErrors[] = 'Fish specie required';
 			return false;
 		}
 
 		if(!isset($data['fins'])){
+			$this->validationErrors[] = 'Fins required.';
 			return false;
 		}
+
 
 		$fins = $data['fins'];
 		$fish_specie_id = $data['fish_specie_id'];

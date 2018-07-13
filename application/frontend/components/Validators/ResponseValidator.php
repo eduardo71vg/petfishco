@@ -18,8 +18,8 @@ class ResponseValidator {
 		if($response &&
 			isset($response->header) &&
 			isset($response->header->statusCode) &&
-			$response->header->statusCode == 200 &&
-			!empty($response->body))
+			($response->header->statusCode == 200 || $response->header->statusCode == 201) )
+			//!empty($response->body))
 		{
 			$success = true;
 		}

@@ -89,12 +89,10 @@ class FishController extends AbstractController {
 		$this->db->begin();
 
 		$data = $this->request->getPut();
-
 		$entity = parent::putAction($id, false);
-
 		if(!$entity){
 			$this->db->rollback();
-			return $this->respond('not_valid');
+			return $this->respond('not_valid', $this->repository->getValidationErrors());
 		}
 
 		$data['fish_id'] = $entity->id;

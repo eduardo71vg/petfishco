@@ -55,7 +55,6 @@ class FishController extends BaseController {
 	 */
 	public function addAction($shop_id, $aquarium_id) {
 
-		$this->view->shop = $this->getShop();
 		$this->view->aquarium_id = $aquarium_id;
 		$this->view->form = new FishForm(null, array('edit' => true));
 
@@ -81,13 +80,12 @@ class FishController extends BaseController {
 
 			$this->view->fish = $fish;
 			$this->view->form = new FishForm($fish, array('edit' => true));
-			$this->view->shop = $this->getShop();
 			$this->view->aquarium_id = $aquarium_id;
 		}
 	}
 
 	/**
-	 * Creates a new product
+	 * Creates a new fish
 	 */
 	public function createAction() {
 		if (!$this->request->isPost()) {
@@ -141,7 +139,7 @@ class FishController extends BaseController {
 	}
 
 	/**
-	 * Saves current product in screen
+	 * Saves current fish in screen
 	 *
 	 * @param string $id
 	 */
@@ -163,7 +161,7 @@ class FishController extends BaseController {
 				[
 					"for" => "aquarium-index",
 					"shop_id" => $shop_id,
-					"aquarium_id" => $aquarium_id,
+					"aquarium_instance_id" => $aquarium_id,
 				]
 			);
 		}
@@ -208,7 +206,7 @@ class FishController extends BaseController {
 			[
 				"for" => "aquarium-index",
 				"shop_id" => $shop_id,
-				"id" => $aquarium_id,
+				"aquarium_instance_id" => $aquarium_id,
 			]
 		);
 	}

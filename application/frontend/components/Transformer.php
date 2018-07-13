@@ -25,10 +25,15 @@ class Transformer extends Component {
 	public function jsonToObject($jsonData, DTOInterface $dto){
 
 		$results = [];
+
 		$class_name = get_class($dto);
 		$data = json_decode($jsonData, true);
 		if(json_last_error()){
 			throw new AppException('Failed Transforming Data '. $class_name . ' '. json_last_error_msg());
+		}
+
+		if(empty($data)){
+			return $results;
 		}
 
 		if (isset($data[0]) && is_array($data[0])) {

@@ -6,6 +6,7 @@ use PetFishCo\Backend\Models\Repositories\RestRepositoryInterface;
 use Phalcon\Http\Request;
 use Phalcon\Logger\Adapter\File;
 use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\ModelInterface;
 
 /**
@@ -49,7 +50,7 @@ abstract class AbstractController extends Controller {
 			$data = $this->request->getPut();
 		}
 		$this->logger->debug(\json_encode($data));
-		$this->logger->debug($this->request->getURI());
+		$this->logger->debug($this->request->getMethod() . ' ' . $this->request->getURI());
 	}
 
 

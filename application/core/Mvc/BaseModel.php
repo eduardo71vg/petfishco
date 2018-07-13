@@ -3,6 +3,7 @@
 namespace PetFishCo\Core\Mvc;
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\Timestampable;
 
 class BaseModel extends Model {
 
@@ -19,7 +20,7 @@ class BaseModel extends Model {
 	 */
 	public function beforeUpdate()
 	{
-		//$this->updated_at = date("Y-m-d H:i:s");
+		$this->updated_at = date("Y-m-d H:i:s");
 	}
 
 	/**
@@ -28,7 +29,7 @@ class BaseModel extends Model {
 	public function initialize() {
 		$this->addBehavior(new SoftDelete(
 			array(
-				'field' => 'active',
+				'field' => 'deleted',
 				'value' => 0
 			)
 		));

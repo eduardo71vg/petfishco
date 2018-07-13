@@ -1,6 +1,7 @@
 <?php
 
 namespace PetFishCo\Core\Mvc;
+use PetFishCo\Frontend\Components\Transformer;
 use Phalcon\Http\Client\Provider\Curl;
 use Phalcon\Logger\Adapter\File;
 use Phalcon\Mvc\User\Component;
