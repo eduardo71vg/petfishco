@@ -10,6 +10,7 @@ use Phalcon\Forms\Element\Select;
 use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Validation\Validator\Numericality;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\StringLength;
 
 class FishForm extends Form {
 
@@ -31,32 +32,29 @@ class FishForm extends Form {
 		$alias = new Text("alias");
 		$alias->setLabel("Alias");
 		$alias->setFilters(['striptags', 'string']);
-//		$alias->addValidators([
-//			new PresenceOf([
-//				'message' => 'Alias is required'
-//			])
-//		]);
+		$alias->addValidators([
+			new PresenceOf([
+				'message' => 'Alias is required'
+			]),
+			new StringLength([
+				"max"            => 45,
+				"min"            => 2,
+				"messageMaximum" => "We don't like really long names",
+				"messageMinimum" => "We want more than just their initials",
+			])
+		]);
 		$this->add($alias);
 
 
 		$color = new Text("color");
 		$color->setLabel("Color");
 		$color->setFilters(['striptags', 'string']);
-//		$color->addValidators([
-//			new PresenceOf([
-//				'message' => 'Alias is required'
-//			])
-//		]);
-		$this->add($color);
-
-		$color = new Text("color");
-		$color->setLabel("Color");
-		$color->setFilters(['striptags', 'string']);
-		//		$color->addValidators([
-		//			new PresenceOf([
-		//				'message' => 'Alias is required'
-		//			])
-		//		]);
+		$color->addValidators([
+			new StringLength([
+				"max"            => 45,
+				"messageMaximum" => "We don't like really long color names",
+			])
+		]);
 		$this->add($color);
 
 
@@ -64,8 +62,11 @@ class FishForm extends Form {
 		$fins->setLabel("Fins");
 		$fins->setFilters(['striptags', 'int']);
 		$fins->addValidators([
+			new PresenceOf([
+				'message' => 'Fins count is required'
+			]),
 			new Numericality([
-				'message' => 'Fins is required'
+				'message' => 'Fins should be a number'
 			])
 		]);
 		$this->add($fins);
@@ -96,7 +97,7 @@ class FishForm extends Form {
 				'message' => 'Stock is required'
 			]),
 			new Numericality([
-				'message' => 'Stock is required'
+				'message' => 'Stock should be a number'
 			])
 		]);
 		$this->add($stock);
