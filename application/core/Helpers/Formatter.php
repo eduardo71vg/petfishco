@@ -1,8 +1,7 @@
 <?php
-namespace PetFishCo\Backend\Helpers;
+namespace PetFishCo\Core\Helpers;
 
 use PetFishCo\Core\Exceptions\AppException;
-use Phalcon\Mvc\Model\ResultInterface;
 use Phalcon\Mvc\Model\Resultset\Simple;
 
 class Formatter {
