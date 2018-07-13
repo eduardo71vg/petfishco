@@ -1,8 +1,12 @@
 <?php
-
-	$is_shop = (!isset($fishes) && isset($shop));
-	$is_aquarium = isset($fishes);
-	$is_fish = isset($fish);
+	/**
+	 * @var $dispatcher \Phalcon\Mvc\Dispatcher
+	 */
+	$dispatcher = $this->dispatcher;
+	$controller = strtolower($dispatcher->getControllerName());
+	$is_shop = ($controller == 'shop');
+	$is_aquarium = ($controller == 'aquarium');
+	$is_fish = ($controller == 'fish');
 ?>
 
 <nav aria-label="breadcrumb">
@@ -13,7 +17,7 @@
 
 		<?php if($is_fish || $is_aquarium || $is_shop){ ?>
 		<li class="breadcrumb-item <?php echo ($is_shop)?'active':''?>" <?php echo ($is_shop)?'aria-current="page"':''?>>
-			<?php if($is_aquarium || $is_fish){ ?>
+			<?php if($is_shop && !$is_aquarium && !$is_fish){ ?>
 				Shop
 			<?php }else{ ?>
 				<a href="<?php echo $this->url->get('/shop/'.$shop->getId());?>">Shop</a>
@@ -23,7 +27,7 @@
 
 		<?php if($is_fish || $is_aquarium){ ?>
 		<li class="breadcrumb-item <?php echo ($is_aquarium)?'active':''?>" <?php echo ($is_aquarium)?'aria-current="page"':''?>>
-			<?php if($is_aquarium){ ?>
+			<?php if($is_aquarium && !$is_fish){ ?>
 				Aquarium
 			<?php }else{ ?>
 				<a href="<?php echo $this->url->get('/shop/'.$shop->getId(). '/aquarium/'. $aquarium_id); ?>">Aquarium</a>

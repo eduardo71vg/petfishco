@@ -65,12 +65,8 @@ class AquariumInstance extends BaseDTO
 	/**
 	 * @return int
 	 */
-	public function getCapacity($measure_system) {
-		if($measure_system == 'I'){
-			return UnitsConverter::formatGallonsOutput(UnitsConverter::litersToGallons($this->capacity));
-		}
-
-		return UnitsConverter::formatLitersOutput($this->capacity);
+	public function getCapacity() {
+		return $this->capacity;
 	}
 
 	/**

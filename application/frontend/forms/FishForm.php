@@ -22,6 +22,7 @@ class FishForm extends Form {
 	 */
 	public function initialize($entity = null, $options = array()) {
 
+		$is_edit_mode = (isset($options['edit']) && $options['edit'] == true);
 		if (!isset($options['edit'])) {
 			$element = new Text("id");
 			$this->add($element->setLabel("Id"));

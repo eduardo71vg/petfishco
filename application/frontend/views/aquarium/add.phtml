@@ -16,7 +16,7 @@
 				<?php $this->partial("breadcrumb"); ?>
 				<?php $this->partial("flash_messages"); ?>
 
-				<?php echo $tag->form("fish/create"); ?>
+				<?php echo $tag->form("/shop/".$shop->getId()."/aquarium/create"); ?>
 				<fieldset>
 
 					<?php foreach ($form->getElements() as $index => $element) : ?>

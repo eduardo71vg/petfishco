@@ -39,14 +39,17 @@
 					  foreach ($aquariums as $index => $aquarium): ?>
 						  <tr>
 							  <th scope="row"><?php echo $aquarium->getId();?></th>
-							  <td><?php echo $aquarium->getCapacity($shop->getMeasureSystem());?></td>
+							  <td><?php echo \PetFishCo\Frontend\Helpers\UnitsConverter::formatVolumeOutput(
+									  $shop->getMeasureSystem(),
+									  $aquarium->getCapacity());
+								  ?></td>
 							  <td><?php echo $aquarium->getAquariumShape();?></td>
 							  <td><?php echo $aquarium->getAquariumMaterial();?></td>
 							  <td><?php echo $aquarium->getAmount();?></td>
 							  <td><?php echo $aquarium->getCreatedAt();?></td>
 							  <td><?php echo $aquarium->getUpdatedAt();?></td>
 							  <td>
-								  <a href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId()); ?>">View</a>
+								  <a href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId()); ?>">Details</a> |
 								  <a href="<?php echo $this->url->get('/shop/'.$shop->getId().'/aquarium/' . $aquarium->getId() . '/edit'); ?>">Edit</a>
 							  </td>
 						  </tr>
