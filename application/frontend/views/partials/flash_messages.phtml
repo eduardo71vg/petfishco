@@ -1,0 +1,22 @@
+<?php
+/**@var $flashSession \Phalcon\Flash\Session */
+$flashSession = $this->flashSession;
+/**@var $flash \Phalcon\Flash\Direct */
+$flash = $this->flash;
+
+/**@var $message Phalcon\Validation\MessageInterface */
+//foreach ($flashSession->getMessages() as $index => $message) :
+//
+//	?>
+<!--	<div class="alert alert---><?php //echo $message->getType(); ?><!--" role="alert">-->
+<!--		--><?php //echo $message->getMessage(); ?>
+<!--	</div>-->
+<?php
+//endforeach;
+$flashSession->output();
+$flash->output();
+?>
+
+
+
+

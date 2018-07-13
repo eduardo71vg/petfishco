@@ -1,0 +1,22 @@
+suites:
+    unit:
+        path: .
+        actor: UnitTester
+        modules:
+            enabled:
+                - Phalcon:
+                    part: services
+                    bootstrap: 'tests/bootstrap.php'
+                    cleanup: true
+                    savepoints: true
+                # add more modules here
+                - Asserts
+settings:
+    shuffle: true
+    lint: true
+paths:
+    tests: tests/Unit
+    output: tests/_output
+    support: tests/_support
+    data: tests
+     

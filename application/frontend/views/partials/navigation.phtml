@@ -1,0 +1,25 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="<?php echo $this->url->get('/');?>">PetFishCo <?php echo ''.isset($shop) ? ' <span class="badge">' . $shop->getName() .'</span>': ''; ?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+	    <?php if(isset($shop)) : ?>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+	        <ul class="navbar-nav ml-auto">
+		        <li class="nav-item">
+			        <a class="nav-link" href="javascript::void()">Units:</a>
+		        </li>
+		        <?php /**@var $shop \PetFishCo\Frontend\Models\DTO\Shop */  ?>
+		        <li class="nav-item <?php echo ($shop->getMeasureSystem() == \PetFishCo\Frontend\Helpers\UnitsConverter::SYSTEM_IMPERIAL) ? 'active' : '' ?>">
+			        <a class="nav-link " href="javascript::void()">Gallons ( gal.)</a>
+		        </li>
+		        <li class="nav-item <?php echo ($shop->getMeasureSystem() == \PetFishCo\Frontend\Helpers\UnitsConverter::SYSTEM_DECIMAL) ? 'active' : '' ?>">
+			        <a class="nav-link" href="javascript::void()">Liters ( L )</a>
+		        </li>
+	        </ul>
+        </div>
+	    <?php endif; ?>
+      </div>
+    </nav>
