@@ -30,6 +30,14 @@ Script can be found in ./application/petfish.sql
 
 ![Database](/application/public/img/system/petshopcodb.png)
 
+## Set it up
+- Docker needs to be installed in your machine
+- Pull the repository
+- Go to the repository folder using the terminal
+- Execute docker-compose up -d (it will take a while)
+- Navigate to localhost:8080 (phpmyadmin) and run petfish.sql script using phalcondb db.
+- Navigate to localhost and ENJOY
+
 ## Future Work
 
 - Api Authentication
