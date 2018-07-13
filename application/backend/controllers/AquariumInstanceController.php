@@ -58,4 +58,28 @@ class AquariumInstanceController extends AbstractController {
 	}
 
 
+	/**
+	 * @param $id
+	 *
+	 * @return null|\PetFishCo\Backend\Models\Repositories\Model|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface|void
+	 */
+	public function putAction($id, $respond = true) {
+
+		$this->db->begin();
+
+		/**@var $entity \PetFishCo\Backend\Models\Entities\AquariumInstance*/
+		$entity = parent::putAction($id, false);
+
+		if(!$entity){
+			$this->db->rollback();
+			return $this->respond('not_valid');
+		}
+
+		$this->db->commit();
+
+		return $this->getAction($id);
+	}
+
+
+
 }

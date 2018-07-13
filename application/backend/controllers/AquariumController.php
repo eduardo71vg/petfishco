@@ -18,28 +18,39 @@ class AquariumController extends AbstractController {
 		$this->repository = new Aquarium(new AquariumModel());
 	}
 
-//	/**
-//	 * Retrieve an element by id from a given repository
-//	 *
-//	 * @param int $id
-//	 *
-//	 * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
-//	 */
-//	public function getAction($id) {
-//
-//		$aquariumInstance = $this->repository->findOne($id);
-//		if(!$aquariumInstance){
-//			return $this->respond('not_found');
-//		}
-//
-//		$aquarium_service = new \PetFishCo\Backend\Models\Services\Aquarium();
-//		$aquarium = $aquarium_service->getByInstanceId($id, $aquariumInstance);
-//		if(empty($aquarium)){
-//			return $this->respond('not_found');
-//		}
-//
-//		return $this->respond('done', $aquarium);
-//	}
+	/**
+	 * @param bool $respond
+	 *
+	 * @return bool|\PetFishCo\Backend\Models\Repositories\Model|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+	 */
+	public function addAction($respond = true) {
+
+		$this->db->begin();
+
+		/**@var $entity \PetFishCo\Backend\Models\Entities\Aquarium*/
+		$entity = parent::addAction(false);
+		if(empty($entity)){
+			$errors = $this->repository->getValidationErrors();
+			return $this->respond('not_valid', [$errors]);
+		}
+
+		$data = $this->request->getPost();
+		$data['aquarium_id'] = $entity->id;
+
+		// store instance
+		$aquariumHasInstance = new \PetFishCo\Backend\Models\Entities\AquariumInstance();
+		$result = $aquariumHasInstance->create($data);
+
+		if ($result === false) {
+			$this->db->rollback();
+
+			return $this->respond('not_valid');
+		}
+
+		$this->db->commit();
+
+		return $this->respond('created' , $entity->toArray() );
+	}
 
 	/**
 	 * GET /aquarium/materials
