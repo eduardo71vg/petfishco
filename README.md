@@ -1,4 +1,4 @@
-# Phalcon Compose
+# PetFish Co
 
 ## Solution
 
