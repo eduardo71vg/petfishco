@@ -35,26 +35,40 @@ $frontend_group->add(
 		"controller" => "Index",
 	]
 );
-$frontend_group->add(
+($frontend_group->add(
 	"/shop/{id:([0-9]+)}",
 	[
 		"action" => "index",
 		"controller" => "Shop",
 		"id" => 1
 	]
-);
+))->setName('shop-index');
 /**
  * Aquarium
  */
 ($frontend_group->add(
-	"/shop/{shop_id:([0-9]+)}/aquarium/{id:([0-9]+)}/edit",
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/update",
+	[
+		"action" => "update",
+		"controller" => "Aquarium",
+	]
+))->setName('aquarium-update');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/create",
+	[
+		"action" => "create",
+		"controller" => "Aquarium",
+	]
+))->setName('aquarium-create');
+($frontend_group->add(
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_id:([0-9]+)}/edit",
 	[
 		"action" => "edit",
 		"controller" => "Aquarium",
 	]
 ))->setName('aquarium-edit');
 ($frontend_group->add(
-	"/shop/{shop_id:([0-9]+)}/aquarium/{id:([0-9]+)}",
+	"/shop/{shop_id:([0-9]+)}/aquarium/{aquarium_instance_id:([0-9]+)}",
 	[
 		"action" => "index",
 		"controller" => "Aquarium",
@@ -65,7 +79,6 @@ $frontend_group->add(
 	[
 		"action" => "add",
 		"controller" => "Aquarium",
-		"id" => 1
 	]
 ))->setName('aquarium-add');
 /**
@@ -148,8 +161,17 @@ $api_group->addPut(
 $api_group->addPost(
 	"/aquarium_instance",
 	[
-		"action" => "put",
+		"action" => "add",
 		"controller" => "aquariuminstance",
+
+	]
+);
+//POST aquarium add
+$api_group->addPost(
+	"/aquarium",
+	[
+		"action" => "add",
+		"controller" => "aquarium",
 
 	]
 );
