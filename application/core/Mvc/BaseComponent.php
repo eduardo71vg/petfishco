@@ -2,6 +2,7 @@
 
 namespace PetFishCo\Core\Mvc;
 use Phalcon\Http\Client\Provider\Curl;
+use Phalcon\Logger\Adapter\File;
 use Phalcon\Mvc\User\Component;
 use Phalcon\Session\Adapter\Database;
 
@@ -13,6 +14,7 @@ use Phalcon\Session\Adapter\Database;
  * @property Config $config
  * @property Transformer $transformer
  * @property Database $session
+ * @property File $logger
  */
 class BaseComponent extends Component {
 

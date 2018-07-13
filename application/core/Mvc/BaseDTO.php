@@ -22,11 +22,12 @@ class BaseDTO implements DTOInterface {
 		}
 	}
 
-//	public function populateWithJson($jsonData){
-//
-//		$data = json_decode($jsonData, true);
-//		if(json_last_error()){
-//
-//		}
-//	}
+	/**
+	 * @return array
+	 */
+	public function toArray(){
+		$insert_array = get_object_vars($this);
+        return $insert_array;
+	}
+
 }

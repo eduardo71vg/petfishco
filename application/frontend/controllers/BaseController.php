@@ -4,6 +4,7 @@ namespace PetFishCo\Frontend\Controllers;
 
 use PetFishCo\Frontend\Components\Validators\ResponseValidator;
 use PetFishCo\Frontend\Components\Transformer;
+use PetFishCo\Frontend\Models\Services\Shop;
 use Phalcon\Config;
 use Phalcon\Flash;
 use Phalcon\Mvc\Controller;
@@ -29,18 +30,23 @@ class BaseController extends Controller {
 
 	protected $service;
 
+	/**
+	 * @var Shop
+	 */
+	protected $shopService;
+
 	public function initialize() {
 
 		$this->responseValidator = new ResponseValidator();
 
-		$shopService = new ShopService();
+		$this->shopService = new ShopService();
 
 		//check if session has catalogs
-		if (!$shopService->sessionHasCatalogs()) {
+		if (!$this->shopService->sessionHasCatalogs()) {
 			//load options material, shapes , species
-			$shopService->retrieveCatalogs();
+			$this->shopService->retrieveCatalogs();
 			//store in sessions to avoid retrieve them every single time
-			$shopService->storeInSession();
+			$this->shopService->storeInSession();
 		}
 	}
 

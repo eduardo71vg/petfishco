@@ -3,7 +3,7 @@
 namespace PetFishCo\Backend\Transformers;
 
 
-use PetFishCo\Backend\Helpers\Formatter;
+use PetFishCo\Core\Helpers\Formatter;
 use PetFishCo\Backend\Models\Entities\AquariumMaterial;
 use PetFishCo\Backend\Models\Entities\AquariumShape;
 use Phalcon\Mvc\Model\Resultset\Simple;

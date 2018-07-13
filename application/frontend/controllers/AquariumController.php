@@ -13,6 +13,7 @@ class AquariumController extends BaseController {
 	public function indexAction($aquarium_instance_id) {
 
 		$this->view->setVar('shop', $this->getShop());
+		$this->view->setVar('species', $this->shopService->getSpecies(true));
 
 		//get aquarium fishes
 		$response = $this->httpClient->get('aquarium_instance/' . $aquarium_instance_id . '/fishes');

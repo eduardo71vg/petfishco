@@ -1,6 +1,7 @@
 <?php
 namespace PetFishCo\Frontend\Models\Services;
 
+use PetFishCo\Core\Helpers\Formatter;
 use PetFishCo\Core\Mvc\BaseComponent;
 use PetFishCo\Frontend\Components\Validators\ResponseValidator;
 use PetFishCo\Frontend\Models\DTO\AquariumMaterial;
@@ -32,39 +33,53 @@ class Shop extends BaseComponent {
 	/**
 	 * @return AquariumShape[]
 	 */
-	public function getShapes() {
+	public function getShapes($format = false) {
 		if(empty($this->shapes)){
 			if(!$this->retrieveCatalogsFromSession()){
 				$this->retrieveCatalogs();
 				$this->storeInSession();
 			}
 		}
+
+		if($format){
+			return Formatter::fromArrayByFieldName($this->shapes);
+		}
+
 		return $this->shapes;
 	}
 
 	/**
 	 * @return AquariumMaterial[]
 	 */
-	public function getMaterials() {
+	public function getMaterials($format = false) {
 		if(empty($this->materials)){
 			if(!$this->retrieveCatalogsFromSession()){
 				$this->retrieveCatalogs();
 				$this->storeInSession();
 			}
 		}
+
+		if($format){
+			return Formatter::fromResultsetById($this->materials);
+		}
+
 		return $this->materials;
 	}
 
 	/**
 	 * @return FishSpecie[]
 	 */
-	public function getSpecies() {
+	public function getSpecies($format = false) {
 
 		if(empty($this->species)){
 			if(!$this->retrieveCatalogsFromSession()){
 				$this->retrieveCatalogs();
 				$this->storeInSession();
 			}
+		}
+
+		if($format){
+			return Formatter::fromResultsetById($this->species);
 		}
 
 		return $this->species;
