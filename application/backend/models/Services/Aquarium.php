@@ -50,7 +50,14 @@ class Aquarium extends \Phalcon\Mvc\User\Component {
 			->getQuery()
 			->execute();
 
-		return $species;
+		$ids = [];
+		if(!empty($species)) {
+			foreach ($species as $index => $specie) {
+				$ids[] = $specie->id;
+			}
+		}
+
+		return $ids;
 	}
 
 	/**
@@ -63,11 +70,11 @@ class Aquarium extends \Phalcon\Mvc\User\Component {
 
 		$aquarium = $this->getByInstanceId($aquarium_instance_id);
 
-		if(!$aquarium){
+		if(empty($aquarium)){
 			throw new AppException('Unable to get aquarium by instance id '.$aquarium_instance_id);
 		}
 
-		return $aquarium->capacity;
+		return $aquarium[0]['capacity'];
 	}
 
 	/**

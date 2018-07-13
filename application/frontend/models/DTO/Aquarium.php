@@ -38,6 +38,24 @@ class Aquarium extends BaseDTO
      */
     protected $aquarium_material;
 
+	/**
+	 *
+	 * @var int
+	 */
+	protected $aquarium_shape_id;
+
+	/**
+	 *
+	 * @var int
+	 */
+	protected $aquarium_material_id;
+
+	/**
+	 *
+	 * @var int
+	 */
+	protected $amount;
+
     /**
      *
      * @var string
@@ -49,6 +67,41 @@ class Aquarium extends BaseDTO
      * @var integer
      */
     protected $deleted;
+
+	/**
+	 * @return int
+	 */
+	public function getAquariumShapeId() {
+		return $this->aquarium_shape_id;
+	}
+
+	/**
+	 * @param int $aquarium_shape_id
+	 */
+	public function setAquariumShapeId($aquarium_shape_id) {
+		$this->aquarium_shape_id = $aquarium_shape_id;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAquariumMaterialId() {
+		return $this->aquarium_material_id;
+	}
+
+	/**
+	 * @param int $aquarium_material_id
+	 */
+	public function setAquariumMaterialId($aquarium_material_id) {
+		$this->aquarium_material_id = $aquarium_material_id;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAmount() {
+		return $this->amount;
+	}
 
     /**
      * Method to set the value of field id
@@ -129,17 +182,12 @@ class Aquarium extends BaseDTO
     /**
      * Returns the value of field capacity
      *
-	 * @param string $measure_system
 	 *
 	 * @return string
 	 */
-    public function getCapacity($measure_system = 'D')
+    public function getCapacity()
     {
-    	if($measure_system == 'I'){
-			return UnitsConverter::formatGallonsOutput(UnitsConverter::litersToGallons($this->capacity));
-	    }
-
-        return UnitsConverter::formatLitersOutput($this->capacity);
+    	return $this->capacity;
     }
 
     /**
