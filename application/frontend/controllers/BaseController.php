@@ -48,10 +48,12 @@ class BaseController extends Controller {
 			//store in sessions to avoid retrieve them every single time
 			$this->shopService->storeInSession();
 		}
+
+		$this->view->shop = $this->getShop();
 	}
 
 	/**
-	 * @return mixed
+	 * @return \PetFishCo\Frontend\Models\DTO\Shop
 	 */
 	protected function getShop() {
 		return $this->session->get('shop');
