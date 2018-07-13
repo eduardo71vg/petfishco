@@ -19,43 +19,6 @@ class Shop extends \Phalcon\Mvc\User\Component {
 		return $data;
 	}
 
-
-	public function getAquariumsOld($shop_id){
-
-
-
-
-		//fetch intances
-		$aquariumInstanceRepo = new AquariumInstance(new \PetFishCo\Backend\Models\Entities\AquariumInstance());
-		$instances = $aquariumInstanceRepo->findBy(['shop_id' => $shop_id]);
-
-		if (empty($instances)) {
-			return [];
-		}
-
-		$aquariumIds = [];
-		array_walk($array, function ($item) use ($aquariumIds) {
-			$aquariumIds[] = $item->aquarium_id;
-		});
-		$aquariumIds = array_unique($aquariumIds);
-
-		if (empty($aquariumIds)) {
-			return [];
-		}
-
-		//fetch aquariums
-		$repository = new AquariumRepo(new AquariumModel());
-		$queryBuilder = $repository->getBaseBuilder();
-		$queryBuilder->inWhere('id', $aquariumIds);
-
-		$page = $repository->paginate($queryBuilder);
-
-		$aquariums = ($page->items) ? $page->items->toArray() : [];
-
-		// merge data
-		return $this->mergeData($aquariums, $instances);
-	}
-
 	/**
 	 * @param array $aquariums
 	 * @param array $instances
