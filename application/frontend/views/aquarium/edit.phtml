@@ -1,0 +1,42 @@
+<?php /**@var $form \Phalcon\Forms\Form*/ ?>
+<?php /**@var $tag \Phalcon\Tag */ ?>
+<?php $tag = $this->tag; ?>
+<header class="bg-primary text-white not-main">
+	<div class="container text-center">
+		<h1>Add Aquarium Shop <?php echo (!empty($shop)) ? $shop->getId() : '';?></h1>
+	</div>
+</header>
+
+<section id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto ">
+				<h2 class="text-center">Edit Aquarium</h2>
+				<?php $this->getContent(); ?>
+				<?php $this->partial("breadcrumb"); ?>
+				<?php $this->partial("flash_messages"); ?>
+
+				<?php echo $tag->form("/shop/".$shop->getId()."/aquarium/".$aquarium_instance->getId()."/update"); ?>
+				<fieldset>
+
+					<?php foreach ($form->getElements() as $index => $element) : ?>
+						<?php if(is_a($element, 'Phalcon\Forms\Element\Hidden')): ?>
+							<?php echo $element->render(); ?>
+						<?php else: ?>
+							<div class="form-group">
+								<?php echo $element->getLabel() ?>
+								<?php echo $element->render(['class'=> 'form-control']) ?>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+
+				</fieldset>
+				<?php echo $tag->submitButton(["Save", "class" => "btn btn-success"]); ?>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
