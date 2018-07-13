@@ -40,6 +40,10 @@ class FishController extends AbstractController {
 
 		/**@var $entity \PetFishCo\Backend\Models\Entities\Fish*/
 		$entity = parent::addAction(false);
+		if(empty($entity)){
+			$errors = $this->repository->getValidationErrors();
+			return $this->respond('not_valid', [$errors]);
+		}
 
 		$data = $this->request->getPost();
 		$data['fish_id'] = $entity->id;
@@ -84,9 +88,15 @@ class FishController extends AbstractController {
 
 		$this->db->begin();
 
+		$data = $this->request->getPut();
+
 		$entity = parent::putAction($id, false);
 
-		$data = $this->request->getPut();
+		if(!$entity){
+			$this->db->rollback();
+			return $this->respond('not_valid');
+		}
+
 		$data['fish_id'] = $entity->id;
 
 		// update the relationship
@@ -94,9 +104,9 @@ class FishController extends AbstractController {
 		$aquariumHasFish = (new \PetFishCo\Backend\Models\Services\AquariumHasFish())
 			->getByShopFishAndAqInstance($entity->id, $data['shop_id'], $data['aquarium_instance_id']);
 
+
 		if (!$aquariumHasFish) {
 			$this->db->rollback();
-
 			return $this->respond('not_valid');
 		}
 
@@ -104,7 +114,6 @@ class FishController extends AbstractController {
 
 		if ($result === false) {
 			$this->db->rollback();
-
 			return $this->respond('not_valid');
 		}
 

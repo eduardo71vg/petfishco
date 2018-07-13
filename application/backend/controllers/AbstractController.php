@@ -4,9 +4,16 @@ namespace PetFishCo\Backend\Controllers;
 
 use PetFishCo\Backend\Models\Repositories\RestRepositoryInterface;
 use Phalcon\Http\Request;
+use Phalcon\Logger\Adapter\File;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\ModelInterface;
 
+/**
+ * Class AbstractController
+ * @package PetFishCo\Backend\Controllers
+ *
+ * @property File $logger
+ */
 abstract class AbstractController extends Controller {
 
 	protected $statusCodes = [
@@ -31,6 +38,20 @@ abstract class AbstractController extends Controller {
 	 * @return mixed
 	 */
 	protected abstract function initRepository();
+
+	public function beforeExecuteRoute($dispatcher){
+
+		$data = [];
+		if($this->request->isPost()){
+			$data = $this->request->getPost();
+		}
+		if($this->request->isPut()){
+			$data = $this->request->getPut();
+		}
+		$this->logger->debug(\json_encode($data));
+		$this->logger->debug($this->request->getURI());
+	}
+
 
 	public function initialize()
 	{
@@ -126,6 +147,7 @@ abstract class AbstractController extends Controller {
 			return false;
 		}
 
+		//fetch model to update
 		/**@var $model ModelInterface*/
 		$model = $this->repository->findOne($id);
 
@@ -134,6 +156,7 @@ abstract class AbstractController extends Controller {
 		}
 
 		if($model) {
+			//update
 			if(!$model->update($data)) {
 				if ($respond) {
 					return $this->respond('not_valid');

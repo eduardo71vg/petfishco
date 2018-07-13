@@ -1,0 +1,42 @@
+<?php
+
+	$is_shop = (!isset($fishes) && isset($shop));
+	$is_aquarium = isset($fishes);
+	$is_fish = isset($fish);
+?>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="<?php echo $this->url->get('/'); ?>">Home</a>
+		</li>
+
+		<?php if($is_fish || $is_aquarium || $is_shop){ ?>
+		<li class="breadcrumb-item <?php echo ($is_shop)?'active':''?>" <?php echo ($is_shop)?'aria-current="page"':''?>>
+			<?php if($is_aquarium || $is_fish){ ?>
+				Shop
+			<?php }else{ ?>
+				<a href="<?php echo $this->url->get('/shop/'.$shop->getId());?>">Shop</a>
+			<?php } ?>
+		</li>
+		<?php } ?>
+
+		<?php if($is_fish || $is_aquarium){ ?>
+		<li class="breadcrumb-item <?php echo ($is_aquarium)?'active':''?>" <?php echo ($is_aquarium)?'aria-current="page"':''?>>
+			<?php if($is_aquarium){ ?>
+				Aquarium
+			<?php }else{ ?>
+				<a href="<?php echo $this->url->get('/shop/'.$shop->getId(). '/aquarium/'. $aquarium_id); ?>">Aquarium</a>
+			<?php } ?>
+		</li>
+		<?php } ?>
+
+		<?php if($is_fish){ ?>
+		<li class="breadcrumb-item active" aria-current="page">Fish</li>
+		<?php } ?>
+	</ol>
+</nav>
+
+
+
+

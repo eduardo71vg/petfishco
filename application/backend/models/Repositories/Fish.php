@@ -29,11 +29,11 @@ class Fish extends BaseRepository implements RestRepositoryInterface {
 
 		$validator = new FishValidator();
 		if(!$validator->isCompatibleSpecieWithAquarium($fish_specie_id, $aquarium_instance_id)){
-			$this->validationErrors[] = ' Conflict With Fish Specie: Guppies and GoldFish are not allowed in the same aquarium';
+			$this->validationErrors[] = ' Conflict With Fish Specie: Goldfish don’t go with guppies.';
 		}
 
 		if(!$validator->isFinCountAllowedInAquarium($fins, $aquarium_instance_id)){
-			$this->validationErrors[] = 'Conflict With Fish Fins Count: Fishes with 3 or less fins are not allowed in aquariums with 75 or less liters';
+			$this->validationErrors[] = 'Conflict With Fish Fins Count: Fish with three fins or more don’t go in aquariums of 75 litres or less.';
 		}
 
 		return empty($this->validationErrors);
