@@ -22,11 +22,13 @@
 - Unit test were built using Codeception and Mockery Framework.
 - Run tests with codecept run unit tests/Unit/FishTest.php
 
-![Unit Tests](../public/img/system/unittests.png)
+![Unit Tests](/application/public/img/system/unittests.png)
 
 ## Database
 
-![Database](../public/img/system/petshopcodb.png)
+Script can be found in ./application/petfish.sql
+
+![Database](/application/public/img/system/petshopcodb.png)
 
 ## Future Work
 
