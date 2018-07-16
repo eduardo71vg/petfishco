@@ -38,9 +38,9 @@ Script can be found in ./application/petfish.sql
 - Docker needs to be installed in your machine
 - Pull the repository
 - Go to the repository folder using the terminal
-- Execute docker-compose up -d (it will take a while)
-- Navigate to localhost:8080 (phpmyadmin) and run petfish.sql script using phalcondb db.
-- Navigate to localhost and ENJOY
+- Execute ./build_compose.sh (it will take a while the first time)
+- It will ask if you want to run the db script, if it is the first time, type y 
+- If everything went well so far, Navigate to localhost and ENJOY
 
 ## Future Work
 
